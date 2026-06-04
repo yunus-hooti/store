@@ -1,0 +1,133 @@
+{% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}فروشگاه{% endblock %}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.65);
+      --border: rgba(255,255,255,.12);
+      --primary: #6d5efc;
+      --primary2: #28d7b6;
+      --danger: #ff4d6d;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin:0; font-family:"Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1200px 700px at 80% -100px, rgba(109,94,252,.38), transparent 55%),
+        radial-gradient(1000px 650px at 10% 0px, rgba(40,215,182,.25), transparent 50%),
+        var(--bg);
+      color: var(--text);
+    }
+    a{ color: inherit; text-decoration: none; }
+    .container{ width: min(1200px, 100%); margin: 0 auto; padding: 24px; }
+    .topbar{
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(11,18,32,.55);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 16px; padding: 14px 24px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .logo{
+      width: 40px; height:40px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      box-shadow: 0 10px 30px rgba(109,94,252,.35);
+    }
+    .nav-actions{ display:flex; align-items:center; gap: 10px; }
+    .pill{
+      padding: 10px 14px; border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: 999px; color: var(--muted);
+      transition: .2s;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .pill:hover{ border-color: rgba(109,94,252,.45); color: rgba(255,255,255,.85); }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight: 700;
+      transition: .2s;
+      cursor:pointer;
+    }
+    .btn-primary{
+      border-color: rgba(109,94,252,.55);
+      background: linear-gradient(135deg, rgba(109,94,252,.95), rgba(40,215,182,.35));
+      box-shadow: 0 18px 45px rgba(109,94,252,.18);
+    }
+    .btn-primary:hover{ transform: translateY(-1px); }
+    .main{ padding: 22px 0 40px; }
+    .footer{
+      border-top: 1px solid var(--border);
+      padding: 18px 0 42px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    /* کارت‌ها */
+    .grid{
+      display:grid; gap: 18px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+  </style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="line-height:1.1;">فروشگاه تخفیف‌دار</div>
+          <div style="color:var(--muted); font-size:13px; font-weight:600;">محصولات منتخب</div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <a class="pill" href="#">دسته‌بندی‌ها</a>
+        <a class="pill" href="#">سبد خرید</a>
+        {% if user.is_authenticated %}
+          <a class="pill" href="{% url 'account:profile' %}">حساب کاربری</a>
+        {% else %}
+          <a class="pill" href="{% url 'account:login' %}">ورود / ثبت‌نام</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <main class="container main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="container footer">
+    طراحی شده با تم گرادیانی — © {% now "Y" %}
+  </footer>
+</body>
+</html>

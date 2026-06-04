@@ -1,0 +1,440 @@
+{% extends "parent/base.html" %}
+{% block title %}پروفایل کاربری{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* استایل‌های کلی برای صفحه پروفایل */
+  body {
+    background-color: #121212; /* پس‌زمینه تیره */
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .profile-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 40px 30px;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr; /* ستون اول کوچکتر برای اطلاعات کاربر، ستون دوم برای محتوا */
+    gap: 40px; /* فاصله بین ستون‌ها */
+    background: rgba(255, 255, 255, 0.03); /* پس‌زمینه تیره با شفافیت کم */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px; /* گوشه‌های گرد بزرگ */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ستون سمت چپ: اطلاعات کاربر */
+  .profile-sidebar {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-sidebar .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    background-color: #6d5efc; /* رنگ پیش‌فرض اگر آواتار نباشد */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  .profile-sidebar h3 {
+    margin-bottom: 10px;
+    color: #28d7b6; /* رنگ عنوان */
+    font-size: 1.8rem;
+    font-weight: 900;
+  }
+
+  .profile-sidebar p {
+    color: #bbb;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .profile-sidebar .user-links a {
+    display: block;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .profile-sidebar .user-links a:hover {
+    background: linear-gradient(135deg, #28d7b6, #6d5efc);
+    color: #fff;
+    transform: translateX(5px);
+  }
+
+  /* ستون سمت راست: بخش‌های اصلی پروفایل */
+  .profile-content {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 35px;
+  }
+
+  .profile-section {
+    margin-bottom: 35px;
+  }
+
+  .profile-section h4 {
+    color: #28d7b6; /* رنگ عنوان بخش */
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+  }
+
+  /* بخش اطلاعات کاربر */
+  .user-info-list li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .user-info-list li strong {
+    color: #ccc;
+    min-width: 120px; /* عرض ثابت برای لیبل‌ها */
+    font-weight: 700;
+  }
+
+  /* بخش سبد خرید */
+  .cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(40, 215, 182, 0.1); /* پس‌زمینه با رنگ گرادیانت */
+    padding: 20px 25px;
+    border-radius: 15px;
+    border: 1px solid #28d7b6;
+  }
+
+  .cart-summary .cart-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .cart-summary .cart-icon {
+    font-size: 2rem;
+    color: #28d7b6;
+  }
+
+  .cart-summary .cart-details h5 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #fff;
+  }
+
+  .cart-summary .cart-details p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+
+  .cart-summary .view-cart-btn {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #28d7b6, #6d5efc);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .cart-summary .view-cart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(109, 94, 252, 0.4);
+  }
+
+  /* بخش آدرس‌ها */
+  .address-table-wrapper {
+    overflow-x: auto; /* برای اسکرول افقی در موبایل */
+  }
+
+  .address-table {
+    width: 100%;
+    border-collapse: separate; /* برای استفاده از border-radius */
+    border-spacing: 0 15px; /* فاصله عمودی بین ردیف‌ها */
+  }
+
+  .address-table th, .address-table td {
+    padding: 18px 20px;
+    text-align: left;
+  }
+
+  .address-table thead th {
+    background-color: rgba(40, 215, 182, 0.15);
+    color: #28d7b6;
+    font-weight: 900;
+    font-size: 1.05rem;
+    border-bottom: 2px solid #6d5efc;
+    border-radius: 10px 10px 0 0; /* فقط بالا گرد */
+  }
+
+  .address-table tbody tr {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px; /* گوشه‌های گرد برای ردیف‌ها */
+    transition: background-color 0.2s ease;
+  }
+
+  .address-table tbody tr:hover {
+    background: rgba(109, 94, 252, 0.1); /* رنگ هاور */
+  }
+
+  .address-table td {
+    font-size: 0.95rem;
+    font-weight: 500;
+    vertical-align: middle; /* وسط چین کردن محتوای سلول */
+  }
+
+  .address-table .badge-default {
+    background-color: #28d7b6;
+    color: #121212; /* متن تیره روی رنگ روشن */
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .address-table .actions a {
+    margin-right: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s ease;
+  }
+
+  .address-table .actions .edit-link {
+    color: #28d7b6;
+  }
+  .address-table .actions .edit-link:hover {
+    color: #fff;
+  }
+
+  .address-table .actions .delete-link {
+    color: #ff5f6d; /* رنگ قرمز برای حذف */
+  }
+  .address-table .actions .delete-link:hover {
+    color: #fff;
+  }
+
+  /* دکمه افزودن آدرس جدید */
+  .add-address-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #28d7b6, #6d5efc);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .add-address-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 18px rgba(109, 94, 252, 0.35);
+  }
+
+  /* دکمه خروج */
+  .logout-button-container {
+    margin-top: 40px;
+    text-align: center; /* مرکز چین کردن دکمه */
+  }
+
+  .logout-button {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #ff5f6d, #e74c3c); /* گرادیانت قرمز */
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .logout-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 18px rgba(231, 76, 60, 0.35);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .profile-container {
+      grid-template-columns: 1fr; /* روی تبلت و موبایل، ستون‌ها روی هم قرار می‌گیرند */
+      padding: 30px 20px;
+    }
+    .profile-sidebar {
+      margin-bottom: 30px;
+    }
+  }
+
+  /* استایل پایه */
+.alert-box {
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+/* استایل برای تگ اختصاصی شما */
+.alert-box.ok_address {
+    background: linear-gradient(135deg, #28d7b6, #20a088);
+    border: 1px solid #28d7b6;
+}
+
+/* اگر خواستید برای خطاها هم استفاده کنید */
+.alert-box.error {
+    background: linear-gradient(135deg, #ff4e50, #f9d423);
+    border: 1px solid #ff4e50;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+
+  <!-- ستون سمت چپ: اطلاعات کاربر -->
+  <div class="profile-sidebar">
+    <div class="avatar">
+{% if messages %}
+    <div class="messages-wrapper">
+        {% for message in messages %}
+            <!-- استفاده از message.tags به عنوان کلاس CSS -->
+            <div class="alert-box {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+      {% if user.first_name %}
+        {{ user.first_name|slice:":1" }}
+      {% elif user.username %}
+        {{ user.username|slice:":1" }}
+      {% else %}
+        <i class="fas fa-user"></i>
+      {% endif %}
+    </div>
+    <h3>{{ user.get_full_name|default:user.first_name }}</h3>
+    <p>{{ user.email|default:"ایمیل وارد نشده" }}</p>
+    <p>شماره موبایل: {{ user.phone|default:"ثبت نشده" }}</p> {# فرض بر وجود مدل Profile با فیلد phone_number #}
+
+    <div class="user-links">
+      <a href="#user-info">اطلاعات من</a>
+      <a href="#addresses">آدرس‌ها</a>
+      <a href="#cart">سبد خرید</a>
+      {# لینک‌های دیگر در صورت نیاز #}
+    </div>
+  </div>
+
+  <!-- ستون سمت راست: محتوای اصلی پروفایل -->
+  <div class="profile-content">
+
+    <!-- بخش اطلاعات کاربر -->
+    <section id="user-info" class="profile-section">
+      <h4>اطلاعات کاربری</h4>
+      <ul class="user-info-list">
+        <li><strong>نام کامل:</strong> {{ user.first_name }} {{user.last_name}}</li>
+        <li><strong>ایمیل:</strong> {{ user.email|default:"-' -" }}</li>
+        <li><strong>شماره موبایل:</strong> {{ user.phone|default:"-' -" }}</li>
+        {# اضافه کردن فیلدهای دیگر پروفایل در صورت نیاز #}
+        {# <li><strong>تاریخ عضویت:</strong> {{ user.date_joined|date:"Y/m/d" }}</li> #}
+      </ul>
+    </section>
+
+    <!-- بخش سبد خرید -->
+    <section id="cart" class="profile-section">
+      <h4>سبد خرید شما</h4>
+      <div class="cart-summary">
+        <div class="cart-info">
+          <i class="fas fa-shopping-cart cart-icon"></i> {# آیکون سبد خرید #}
+          <div class="cart-details">
+            <h5>{{ cart_item_count|default:0 }} آیتم در سبد خرید</h5>
+            <p>مجموع قیمت: ...</p> {# نمایش مجموع قیمت در صورت دسترسی #}
+          </div>
+        </div>
+        <a href="#" class="view-cart-btn">مشاهده سبد خرید</a> {# فرض بر وجود مسیر cart:view_cart #}
+      </div>
+    </section>
+
+    <!-- بخش آدرس‌ها -->
+    <section id="addresses" class="profile-section">
+      <h4>آدرس‌های شما</h4>
+      <div class="address-table-wrapper">
+        <table class="address-table">
+          <thead>
+            <tr>
+              <th>نام شخص</th>
+              <th>شماره تماس</th>
+              <th>استان</th>
+              <th>شهر</th>
+              <th>وضعیت</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for address in address_user %} {# فرض بر این است که address_user از view ارسال شده #}
+            <tr>
+              <td>{{ address.full_name }}</td>
+              <td>{{ address.phone_number }}</td>
+              <td>{{ address.province }}</td>
+              <td>{{ address.city }}</td>
+              <td>
+                {% if address.is_default %}
+                <span class="badge-default">پیش‌فرض</span>
+                {% else %}
+                -
+                {% endif %}
+              </td>
+              <td class="actions">
+                {# لینک ویرایش #}
+                <a href="{% url 'account:edit_address' address.pk %}" class="edit-link"><i class="fas fa-edit"></i> ویرایش</a>
+                {# لینک حذف #}
+                <a href="{% url 'account:delete_address' address.pk %}" onclick="return confirm('آیا از حذف این آدرس مطمئن هستید؟');" class="delete-link"><i class="fas fa-trash-alt"></i> حذف</a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 30px;">هیچ آدرسی ثبت نشده است.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {# دکمه افزودن آدرس جدید #}
+      <a href="{% url 'account:address_create' %}" class="add-address-btn"><i class="fas fa-plus-circle"></i> افزودن آدرس جدید</a> {# فرض بر وجود مسیر address_create #}
+    </section>
+
+    <!-- دکمه خروج -->
+    <div class="logout-button-container">
+      <a href="{% url 'account:logout' %}" class="logout-button">خروج از حساب کاربری</a> {# فرض بر وجود مسیر account:logout #}
+    </div>
+
+  </div> {# end profile-content #}
+</div> {# end profile-container #}
+{% endblock %}

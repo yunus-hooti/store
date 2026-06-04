@@ -1,0 +1,213 @@
+{% extends "parent/base.html" %}
+{% block title %}محصولات تخفیف‌دار{% endblock %}
+
+{% block extra_head %}
+<style>
+  .hero{
+    display:flex; align-items:flex-start; justify-content:space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .hero h1{
+    margin:0;
+    font-size: 26px;
+    letter-spacing: .2px;
+  }
+  .hero p{
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap: 8px;
+    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.05);
+    padding: 10px 12px;
+    border-radius: 14px;
+    color: rgba(255,255,255,.88);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge .dot{
+    width:10px; height:10px; border-radius:999px;
+    background: linear-gradient(135deg, var(--primary), var(--primary2));
+    box-shadow: 0 10px 25px rgba(109,94,252,.35);
+  }
+
+  .card{
+    grid-column: span 3;
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    position: relative;
+    transition: .25s;
+  }
+  .card:hover{ transform: translateY(-4px); border-color: rgba(109,94,252,.35); }
+
+  .thumb{
+    height: 190px;
+    background:
+      radial-gradient(500px 220px at 70% -40px, rgba(109,94,252,.35), transparent 55%),
+      radial-gradient(420px 220px at 10% 0px, rgba(40,215,182,.25), transparent 55%),
+      rgba(0,0,0,.18);
+    display:flex; align-items:center; justify-content:center;
+    padding: 14px;
+  }
+  .thumb img{
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 22px rgba(0,0,0,.3));
+  }
+
+  .content{
+    padding: 14px 14px 16px;
+  }
+  .title{
+    font-weight: 800;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.5;
+    height: 44px;
+    overflow:hidden;
+    color: rgba(255,255,255,.93);
+  }
+
+  .meta{
+    margin-top: 10px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 10px;
+  }
+  .priceWrap{
+    display:flex; align-items:baseline; gap: 10px;
+  }
+  .oldPrice{
+    color: rgba(255,255,255,.55);
+    text-decoration: line-through;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .newPrice{
+    font-weight: 900;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .tag{
+    position:absolute; top: 12px; left: 12px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #06131d;
+    background: linear-gradient(135deg, #28d7b6, #6d5efc);
+    border: 1px solid rgba(255,255,255,.22);
+  }
+
+  .actions{
+    margin-top: 12px;
+    display:flex; gap: 10px;
+  }
+  .btn{
+    width: 100%;
+    padding: 10px 12px;
+  }
+  .btn-soft{
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.14);
+    color: rgba(255,255,255,.88);
+    font-weight: 800;
+    border-radius: 12px;
+    transition: .2s;
+    text-align:center;
+  }
+  .btn-soft:hover{ border-color: rgba(40,215,182,.4); }
+
+  .btn-primary{
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-weight: 900;
+    border: none;
+    cursor:pointer;
+    color: #06131d;
+    background: linear-gradient(135deg, #28d7b6, #6d5efc);
+    transition: .2s;
+  }
+  .btn-primary:hover{ transform: translateY(-1px); }
+
+  /* responsive */
+  @media (max-width: 1024px){
+    .card{ grid-column: span 4; }
+  }
+  @media (max-width: 768px){
+    .card{ grid-column: span 6; }
+  }
+  @media (max-width: 520px){
+    .card{ grid-column: span 12; }
+    .hero{ flex-direction: column; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  <div class="hero">
+    <div>
+      <h1>محصولات تخفیف‌دار</h1>
+      <p>انتخاب‌های ویژه امروز — با قیمت‌های به‌صرفه</p>
+    </div>
+
+    <div class="badge" title="تعداد محصولات">
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{ products|length }} محصول</span>
+    </div>
+  </div>
+
+  <section class="grid">
+    {% for p in products %}
+      <article class="card">
+        {% if p.discount_percent %}
+          <div class="tag">٪{{ p.discount_percent }} تخفیف</div>
+        {% endif %}
+
+        <div class="thumb">
+          {% if p.images.first.image %}
+             <img src="{{ p.images.first.image.url }}" alt="{{ p.name }}">
+          {% else %}
+            <div style="color: var(--muted); font-weight:800;">تصویر ندارد</div>
+          {% endif %}
+        </div>
+
+        <div class="content">
+          <h3 class="title">{{ p.name }}</h3>
+
+          <div class="meta">
+            <div class="priceWrap">
+              {% if p.old_price %}
+                <span class="oldPrice">{{ p.old_price }} تومان</span>
+              {% endif %}
+              <span class="newPrice">{{ p.price }} تومان</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a class="btn-soft" href="{% url 'catalog:product_detail' p.id %}">
+              مشاهده
+            </a>
+            <form method="post" action="#" style="margin:0; flex:1;">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ p.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button class="btn-primary" type="submit">افزودن</button>
+            </form>
+          </div>
+        </div>
+      </article>
+    {% empty %}
+      <div style="grid-column: 1 / -1; padding: 26px; border: 1px dashed rgba(255,255,255,.2); border-radius: 18px; color: var(--muted); font-weight: 800; text-align:center;">
+        محصول تخفیف‌داری پیدا نشد.
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}

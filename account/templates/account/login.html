@@ -1,0 +1,93 @@
+{% extends "parent/base.html" %}
+{% block title %}ورود به حساب کاربری{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* استفاده از همان استایل form-container برای حفظ یکپارچگی */
+  .auth-container {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 40px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+  }
+
+  h2 { margin-bottom: 30px; font-weight: 900; text-align: center; color: #fff; }
+
+  .form-group { margin-bottom: 20px; }
+  label { display: block; margin-bottom: 8px; font-weight: 800; color: #ccc; }
+
+  input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(0,0,0,.2);
+    border: 1px solid rgba(255,255,255,.1);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 14px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #28d7b6, #6d5efc);
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.2s;
+  }
+
+  .btn-submit:hover { transform: scale(1.02); }
+
+  .auth-footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  .auth-footer a { color: #28d7b6; text-decoration: none; font-weight: 700; }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+{{ message }}
+{% endfor %}
+{% endif %}
+<div class="auth-container">
+  <h2>ورود به پنل</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div style="color: #ff5f6d; margin-bottom: 15px; text-align: center; font-weight: bold;">
+        نام کاربری یا رمز عبور اشتباه است.
+      </div>
+    {% endif %}
+
+    <div class="form-group">
+      <label>شماره تلفن</label>
+      <input type="text" name="username" required placeholder="نام کاربری خود را وارد کنید">
+    </div>
+
+    <div class="form-group">
+      <label>رمز عبور</label>
+      <input type="password" name="password" required placeholder="••••••••">
+    </div>
+
+    <button type="submit" class="btn-submit">ورود به حساب</button>
+  </form>
+
+  <div class="auth-footer">
+    حساب ندارید؟ <a href="#">ثبت‌نام کنید</a>
+  </div>
+</div>
+{% endblock %}

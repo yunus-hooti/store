@@ -1,0 +1,121 @@
+{% extends "parent/base.html" %}
+{% block title %}افزودن محصول جدید{% endblock %}
+
+{% block extra_head %}
+<style>
+  .form-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+  }
+
+  h2 { margin-bottom: 25px; font-weight: 900; }
+
+  .form-group { margin-bottom: 20px; }
+  label { display: block; margin-bottom: 8px; font-weight: 800; color: #ccc; }
+
+  .inline-flex { display: flex; gap: 10px; align-items: flex-end; }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(0,0,0,.2);
+    border: 1px solid rgba(255,255,255,.1);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .btn-icon {
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: none;
+    background: #6d5efc;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 900;
+  }
+
+  .attr-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; margin-bottom: 10px; }
+
+  .btn-add { background: #28d7b6; color: #06131d; }
+  .btn-submit { width: 100%; padding: 15px; margin-top: 20px; border: none; border-radius: 14px; font-weight: 900; background: linear-gradient(135deg, #28d7b6, #6d5efc); cursor: pointer; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h2>ثبت محصول جدید</h2>
+  
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- انتخاب دسته‌بندی -->
+    <div class="form-group">
+      <label>دسته‌بندی</label>
+      <div class="inline-flex">
+        <select name="category">
+          {% for cat in category %}
+            <option value="{{ cat.id }}">{{ cat.name }}</option>
+          {% endfor %}
+        </select>
+        <button type="button" class="btn-icon" onclick="alert('باز کردن مودال ساخت دسته بندی')">+</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>نام کالا</label>
+      <input type="text" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label>توضیحات</label>
+      <textarea name="description" rows="4"></textarea>
+    </div>
+
+    <div class="form-group inline-flex">
+      <div style="flex:1"><label>قیمت (تومان)</label><input type="number" name="price" required></div>
+      <div style="flex:1"><label>تعداد موجودی</label><input type="number" name="inventory" required></div>
+      <div style="flex:1"><label>وزن (گرم)</label><input type="number" name="weight"></div>
+    </div>
+
+    <!-- ویژگی‌ها -->
+    <div class="form-group">
+      <label>ویژگی‌ها</label>
+      <div id="attributes-container">
+        <div class="attr-row">
+          <input type="text" name="attr_name[]" placeholder="نام ویژگی (مثلا رنگ)">
+          <input type="text" name="attr_value[]" placeholder="مقدار (مثلا قرمز)">
+          <button type="button" class="btn-icon" style="background:#ff5f6d" onclick="this.parentElement.remove()">-</button>
+        </div>
+      </div>
+      <button type="button" class="btn-icon btn-add" style="margin-top:10px" onclick="addAttribute()">+ افزودن ویژگی</button>
+    </div>
+
+    <div class="form-group">
+      <label>تصویر کالا</label>
+      <input type="file" name="image" accept="image/*">
+    </div>
+
+    <button type="submit" class="btn-submit">ثبت و ذخیره محصول</button>
+  </form>
+</div>
+
+<script>
+  function addAttribute() {
+    const container = document.getElementById('attributes-container');
+    const div = document.createElement('div');
+    div.className = 'attr-row';
+    div.innerHTML = `
+      <input type="text" name="attr_name[]" placeholder="نام ویژگی">
+      <input type="text" name="attr_value[]" placeholder="مقدار">
+      <button type="button" class="btn-icon" style="background:#ff5f6d" onclick="this.parentElement.remove()">-</button>
+    `;
+    container.appendChild(div);
+  }
+</script>
+{% endblock %}

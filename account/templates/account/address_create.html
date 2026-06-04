@@ -1,0 +1,219 @@
+{% extends "parent/base.html" %}
+
+{% block title %}
+  {% if is_edit %}ویرایش آدرس{% else %}ثبت آدرس{% endif %}
+{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* استایل‌های قبلی شما */
+  .address-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    color: #fff;
+  }
+
+  h2 { margin-bottom: 30px; font-weight: 900; text-align: center; color: #28d7b6; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* دو ستون */
+    gap: 15px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 800;
+    color: #ccc;
+    font-size: 0.9rem;
+  }
+
+  /* استایل کلی برای ورودی‌ها */
+  .form-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-weight: 600;
+    box-sizing: border-box; /* مهم برای محاسبه padding و border */
+  }
+
+  .form-input:focus {
+    border-color: #6d5efc;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(109, 94, 252, 0.3); /* نور ملایم هنگام فوکوس */
+  }
+
+  /* استایل برای Textarea */
+  textarea.form-input {
+    min-height: 100px; /* ارتفاع حداقل برای آدرس */
+    resize: vertical; /* اجازه تغییر اندازه عمودی */
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 14px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #28d7b6, #6d5efc);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1.1rem;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(40, 215, 182, 0.3);
+  }
+
+  /* استایل برای خطاهای فرم */
+  .errorlist {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    color: #ff6b6b; /* رنگ قرمز برای خطا */
+    font-size: 0.85rem;
+  }
+
+  .errorlist li { margin-bottom: 3px; }
+
+  /* اگر از is_edit استفاده می‌کنی */
+  .auth-container .auth-title {
+      margin-bottom: 30px; /* فضای زیر عنوان */
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="address-container">
+  {# نمایش پیام‌ها (اگر از system messages استفاده می‌کنید) #}
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <h2>{% if is_edit %}ویرایش آدرس{% else %}ثبت آدرس جدید{% endif %}</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    {# نمایش خطاها برای کل فرم در بالای آن #}
+    {% if form.non_field_errors %}
+      <div class="errorlist">
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+        {{ form.first_name }} {# جنگو خودش input با کلاس‌های widgets را می‌سازد #}
+        {% if form.first_name.errors %}
+          <ul class="errorlist">
+            {% for error in form.first_name.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+          <ul class="errorlist">
+            {% for error in form.last_name.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+      {{ form.phone_number }}
+      {% if form.phone_number.errors %}
+        <ul class="errorlist">
+          {% for error in form.phone_number.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="{{ form.province.id_for_label }}">{{ form.province.label }}</label>
+        {{ form.province }}
+        {% if form.province.errors %}
+          <ul class="errorlist">
+            {% for error in form.province.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.city.id_for_label }}">{{ form.city.label }}</label>
+        {{ form.city }}
+        {% if form.city.errors %}
+          <ul class="errorlist">
+            {% for error in form.city.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.cod_post.id_for_label }}">{{ form.cod_post.label }}</label>
+      {{ form.cod_post }}
+      {% if form.cod_post.errors %}
+        <ul class="errorlist">
+          {% for error in form.cod_post.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    {# اگر فیلد آدرس کامل دارید #}
+    {% if form.address %}
+    <div class="form-group">
+      <label for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+      {{ form.address }}
+      {% if form.address.errors %}
+        <ul class="errorlist">
+          {% for error in form.address.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <button type="submit" class="btn-submit">
+      {% if is_edit %}ذخیره تغییرات{% else %}ثبت آدرس{% endif %}
+    </button>
+  </form>
+</div>
+{% endblock %}

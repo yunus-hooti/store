@@ -1,0 +1,290 @@
+{% extends "parent/base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block extra_head %}
+<style>
+    .product-shell{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel{
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      overflow: hidden;
+    }
+
+    .image-panel{
+      padding: 18px;
+    }
+
+    .image-box{
+      min-height: 500px;
+      border-radius: 20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(700px 300px at 70% 0%, rgba(109,94,252,.32), transparent 55%),
+        radial-gradient(500px 280px at 20% 0%, rgba(40,215,182,.18), transparent 50%),
+        rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 24px;
+    }
+
+    .image-box img{
+      max-width: 100%;
+      max-height: 460px;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 28px rgba(0,0,0,.3));
+    }
+
+    .detail-panel{
+      padding: 22px;
+    }
+
+    .breadcrumbs{
+      color: rgba(255,255,255,.62);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .title{
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.5;
+      font-weight: 900;
+    }
+
+    .submeta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.82);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .chip.success{
+      background: rgba(40,215,182,.12);
+      border-color: rgba(40,215,182,.25);
+    }
+
+    .price-card{
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      margin: 18px 0;
+    }
+
+    .price-row{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .old-price{
+      color: rgba(255,255,255,.55);
+      text-decoration: line-through;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .new-price{
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .discount-badge{
+      display:inline-flex;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #28d7b6, #6d5efc);
+      color: #06131d;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .desc{
+      color: rgba(255,255,255,.82);
+      line-height: 2;
+      font-size: 15px;
+      margin-top: 16px;
+    }
+
+    .divider{
+      height: 1px;
+      background: rgba(255,255,255,.10);
+      margin: 18px 0;
+    }
+
+    .specs{
+      display:grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .spec{
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.85);
+      font-weight: 700;
+    }
+
+    .spec span:last-child{
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn{
+      flex: 1;
+      border: none;
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: .2s;
+      text-align: center;
+    }
+
+    .btn-primary{
+      color: #06131d;
+      background: linear-gradient(135deg, #28d7b6, #6d5efc);
+    }
+
+    .btn-secondary{
+      color: #fff;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 900px){
+      .product-shell{
+        grid-template-columns: 1fr;
+      }
+      .image-box{
+        min-height: 360px;
+      }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="product-shell">
+    <!-- تصویر -->
+    <section class="panel image-panel">
+        <div class="image-box">
+            {% if product.images.first.image %}
+            <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}">
+            {% else %}
+            <div style="color: var(--muted); font-weight:800;">تصویر محصول موجود نیست</div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- اطلاعات -->
+    <section class="panel detail-panel">
+        <div class="breadcrumbs">
+            <a href="#">خانه</a> /
+            <a href="#">{{ product.category.name }}</a> /
+            <span>{{ product.name }}</span>
+        </div>
+
+        <h1 class="title">{{ product.name }}</h1>
+
+        <div class="submeta">
+            {% if product.inventory > 0 %}
+            <span class="chip success">موجود در انبار: {{ product.inventory }}</span>
+            {% else %}
+            <span class="chip">ناموجود</span>
+            {% endif %}
+
+            {% if product.category %}
+            <span class="chip">دسته‌بندی: {{ product.category.name }}</span>
+            {% endif %}
+
+            {% if product.discount_percent %}
+            <span class="discount-badge">٪{{ product.discount_percent }} تخفیف</span>
+            {% endif %}
+        </div>
+
+        <div class="price-card">
+            <div class="price-row">
+                <div>
+                    {% if product.old_price %}
+                    <div class="old-price">{{ product.old_price }} تومان</div>
+                    {% endif %}
+                    <div class="new-price">{{ product.price }} تومان</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="desc">
+            {{ product.description|linebreaks }}
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="specs">
+            <div class="spec">
+                <span>شناسه محصول</span>
+                <span>#{{ product.id }}</span>
+            </div>
+            <div class="spec">
+                <span>وضعیت</span>
+                <span>{% if product.inventory > 0 %}آماده ارسال{% else %}ناموجود{% endif %}</span>
+            </div>
+            <div class="spec">
+                <span>دسته‌بندی</span>
+                <span>{{ product.category.name }}</span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <form method="post" action="#" style="flex:1; margin:0;">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="hidden" name="quantity" value="1">
+                <button class="btn btn-primary" type="submit">افزودن به سبد</button>
+            </form>
+
+            <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">بازگشت</a>
+        </div>
+    </section>
+</div>
+{% endblock %}

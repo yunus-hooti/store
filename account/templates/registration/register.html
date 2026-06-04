@@ -1,0 +1,180 @@
+{% extends "parent/base.html" %}
+{% block title %}ثبت‌نام کاربر جدید{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* استایل‌های اصلی صفحه "افزودن محصول" */
+  .form-container {
+    max-width: 800px; /* کمی عریض‌تر برای فرم ثبت‌نام هم مناسب است */
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+  }
+
+  h2 { margin-bottom: 25px; font-weight: 900; text-align: center; } /* عنوان وسط‌چین */
+
+  .form-group { margin-bottom: 20px; }
+  label { display: block; margin-bottom: 8px; font-weight: 800; color: #ccc; }
+
+  /* نمایش فیلدها در کنار هم */
+  .inline-flex {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end; /* هم‌ترازی پایین */
+  }
+  .inline-flex > div { /* تنظیم عرض هر آیتم در inline-flex */
+    flex: 1;
+  }
+
+  input, select, textarea { /* استایل کلی فیلدهای ورودی */
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(0,0,0,.2);
+    border: 1px solid rgba(255,255,255,.1);
+    color: #fff;
+    font-weight: 600;
+    box-sizing: border-box; /* مهم برای حفظ عرض */
+  }
+
+  textarea { resize: vertical; } /* اجازه تغییر اندازه عمودی تکست‌اریا */
+
+  /* استایل دکمه‌های آیکن‌دار */
+  .btn-icon {
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: none;
+    background: #6d5efc; /* رنگ اصلی دکمه آیکن */
+    color: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 1.2em; /* کمی بزرگتر کردن آیکن */
+    display: flex; /* برای سنتر کردن آیکن */
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* جلوگیری از کوچک شدن دکمه */
+  }
+
+  /* استایل دکمه حذف ویژگی */
+  .btn-icon[style*="background:#ff5f6d"] {
+    background: #ff5f6d; /* رنگ قرمز برای حذف */
+  }
+
+  /* دکمه افزودن ویژگی */
+  .btn-add {
+    background: #28d7b6; /* رنگ سبز روشن */
+    color: #06131d;
+    margin-top: 10px; /* فاصله از آیتم‌های بالا */
+    padding: 12px 20px; /* کمی padding بیشتر */
+  }
+
+  /* دکمه اصلی ثبت نام */
+  .btn-submit {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 14px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #28d7b6, #6d5efc); /* گرادیانت سبز به بنفش */
+    cursor: pointer;
+    color: #fff; /* رنگ متن سفید */
+    font-size: 1.1em; /* کمی بزرگتر کردن متن دکمه */
+  }
+
+  /* برای نمایش پیام های خطا */
+  .error-message {
+    color: #ff5f6d; /* رنگ قرمز برای خطا */
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: block;
+  }
+
+  /* برای مشخص کردن فیلدهای اختیاری */
+  .optional-label {
+      font-weight: 400;
+      color: #aaa; /* رنگ خاکستری روشن */
+      font-size: 0.8em;
+      margin-left: 5px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h2>ثبت‌نام کاربر</h2>
+
+  <form method="post" enctype="multipart/form-data"> {# enctype برای آپلود فایل لازم است، اینجا برای ثبت نام لازم نیست اما برای حفظ ساختار گذاشته شده #}
+    {% csrf_token %}
+
+    <!-- فیلدهای نام و نام خانوادگی (اختیاری) -->
+    <div class="form-group inline-flex">
+      <div style="flex:1;">
+        <label>نام <span class="optional-label">(اختیاری)</span></label>
+        <input type="text" name="first_name" placeholder="نام شما">
+        {# نمایش خطا برای نام #}
+        {% if form.first_name.errors %}
+          {% for error in form.first_name.errors %}
+            <span class="error-message">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div style="flex:1;">
+        <label>نام خانوادگی <span class="optional-label">(اختیاری)</span></label>
+        <input type="text" name="last_name" placeholder="نام خانوادگی شما">
+        {# نمایش خطا برای نام خانوادگی #}
+        {% if form.last_name.errors %}
+          {% for error in form.last_name.errors %}
+            <span class="error-message">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- فیلد شماره همراه (اجباری) -->
+    <div class="form-group">
+      <label>شماره همراه <span style="color: red;">*</span></label>
+      <input type="tel" name="phone" placeholder="مثلا: 09123456789" required>
+      {# نمایش خطا برای شماره همراه #}
+      {% if form.phone.errors %}
+        {% for error in form.phone.errors %}
+          <span class="error-message">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- فیلد رمز عبور  -->
+    <div class="form-group">
+      <label>رمز عبور <span style="color: red;">*</span></label>
+      <input type="password" name="password" placeholder="حداقل ۸ کاراکتر">
+       {# نمایش خطا برای رمز عبور #}
+      {% if form.password.errors %}
+        {% for error in form.password.errors %}
+          <span class="error-message">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- فیلد تایید رمز عبور  -->
+    <div class="form-group">
+      <label>تایید رمز عبور <span style="color: red;">*</span></label>
+      <input type="password" name="password_confirm" placeholder="تکرار رمز عبور">
+       {# نمایش خطا برای تایید رمز عبور #}
+      {% if form.password_confirm.errors %}
+        {% for error in form.password_confirm.errors %}
+          <span class="error-message">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- دکمه ثبت نام -->
+    <button type="submit" class="btn-submit">ثبت‌نام</button>
+  </form>
+</div>
+
+{# اسکریپت جاوا اسکریپت اگر نیاز باشد (در اینجا برای ثبت نام استفاده نشده) #}
+{# <script> ... </script> #}
+{% endblock %}

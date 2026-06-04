@@ -1,0 +1,87 @@
+{% extends "parent/base.html" %}
+{% block title %}خروج از حساب{% endblock %}
+<!---->
+{% block extra_head %}
+<style>
+  .logout-container {
+    max-width: 520px;
+    margin: 80px auto;
+    padding: 40px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+    text-align: center;
+  }
+<!---->
+  .logout-title {
+    font-size: 1.7rem;
+    font-weight: 900;
+    margin-bottom: 14px;
+    color: #fff;
+  }
+<!---->
+  .logout-text {
+    color: #ccc;
+    line-height: 1.9;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+<!---->
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+<!---->
+  .btn {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+  }
+<!---->
+  .btn-logout {
+    background: linear-gradient(135deg, #ff5f6d, #ff8a5b);
+    color: #fff;
+  }
+<!---->
+  .btn-cancel {
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.12);
+  }
+<!---->
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+</style>
+{% endblock %}
+<!---->
+{% block content %}
+<div class="logout-container">
+  <div class="logout-title">خروج از حساب کاربری</div>
+  <div class="logout-text">
+    آیا مطمئن هستید که می‌خواهید از حساب خود خارج شوید؟
+    <br>
+    پس از خروج، برای دسترسی دوباره باید وارد حساب شوید.
+  </div>
+<!---->
+  <form method="post">
+    {% csrf_token %}
+    <div class="btn-row">
+      <button type="submit" class="btn btn-logout">بله، خروج</button>
+      <a href="{% url 'account:profile' %}" class="btn btn-cancel">انصراف</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+<!---->
