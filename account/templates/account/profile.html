@@ -312,6 +312,62 @@
     border: 1px solid #ff4e50;
 }
 
+
+  .profile-actions-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center; /* تراز کردن در مرکز عمودی */
+    margin-top: 30px;
+  }
+
+  /* استایل مشترک برای هر دو دکمه جهت هم‌ترازی */
+  .btn-shared {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px; /* تنظیم دقیق پدینگ برای ارتفاع یکسان */
+    height: 45px;       /* تعیین ارتفاع ثابت برای جلوگیری از بالا پایین شدن */
+    border-radius: 10px;
+    font-family: Tahoma, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    box-sizing: border-box; /* جلوگیری از بهم ریختگی سایز با حاشیه */
+  }
+
+  /* استایل دکمه تغییر رمز */
+  .btn-change-pass {
+    background-color: #ffffff;
+    color: #6c63ff;
+    border-color: #6c63ff;
+  }
+  .btn-change-pass:hover {
+    background-color: #6c63ff;
+    color: #ffffff;
+  }
+
+  /* استایل دکمه خروج (یکپارچه شده با ابعاد بالا) */
+  .btn-logout {
+    background-color: #ff6363;
+    color: #ffffff;
+    border-color: #ff6363;
+  }
+  .btn-logout:hover {
+    background-color: #e55353;
+    border-color: #e55353;
+  }
+
+  .icon-lock {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+  }
+
 </style>
 {% endblock %}
 
@@ -430,10 +486,22 @@
       <a href="{% url 'account:address_create' %}" class="add-address-btn"><i class="fas fa-plus-circle"></i> افزودن آدرس جدید</a> {# فرض بر وجود مسیر address_create #}
     </section>
 
-    <!-- دکمه خروج -->
-    <div class="logout-button-container">
-      <a href="{% url 'account:logout' %}" class="logout-button">خروج از حساب کاربری</a> {# فرض بر وجود مسیر account:logout #}
-    </div>
+<div class="profile-actions-container">
+  <!-- دکمه تغییر رمز -->
+  <a href="{% url 'account:password_change' %}" class="btn-shared btn-change-pass">
+    <svg class="icon-lock" viewBox="0 0 24 24">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    </svg>
+    تغییر رمز عبور
+  </a>
+
+  <!-- دکمه خروج با استایل یکپارچه -->
+  <a href="{% url 'account:logout' %}" class="btn-shared btn-logout">
+    خروج از حساب
+  </a>
+</div>
+
 
   </div> {# end profile-content #}
 </div> {# end profile-container #}
