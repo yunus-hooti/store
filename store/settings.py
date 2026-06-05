@@ -57,7 +57,7 @@ ROOT_URLCONF = 'store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / "account/templates/",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +130,5 @@ LOGIN_URL = 'account:login'
 LOGOUT_URL = 'account:logout'
 LOGOUT_REDIRECT_URL = "account:login"
 LOGIN_REDIRECT_URL = "account:profile"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

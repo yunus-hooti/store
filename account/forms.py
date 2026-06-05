@@ -30,16 +30,22 @@ class CreateUserForm(forms.ModelForm):
             raise forms.ValidationError("رمز عبور یکی نیستن")
         return password_confirm
 
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+        if phone.isdigit():
+            if len(phone) == 11:
+                if User.manager.filter(phone=phone).exists():
+                    raise forms.ValidationError('این شماره قبلن ثبت نام کرده')
+                return phone
+            else:
+                raise forms.ValidationError('شماره باید 11 رقم باشد')
+        else:
+            raise forms.ValidationError('شماره باید عدد باشد')
 
-# class AddressCreatedForm(forms.ModelForm):
-#     class Meta:
-#         model = AddressUser
-#         fields = ['phone_number', 'first_name', 'last_name', 'province', 'city', 'cod_post']
 
 class AddressCreatedForm(forms.ModelForm):
     class Meta:
         model = AddressUser
-        # مطمئن شو که این فیلدها دقیقاً با نام فیلدهای مدل Address مطابقت دارند
         fields = ["first_name", "last_name", "phone_number", "province", "city", "cod_post"]
         widgets = {
             "first_name": forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'نام خود را وارد کنید'}),
@@ -48,7 +54,5 @@ class AddressCreatedForm(forms.ModelForm):
             "province": forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'مثلا: تهران'}),
             "city": forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'مثلا: تهران'}),
             "cod_post": forms.TextInput(attrs={'class': 'form-input', 'placeholder': '12345-67890'}),
-            # اگر فیلد address دارید و از Textarea استفاده می‌شود:
         }
 
-    # در صورت نیاز می‌توانید clean methods را هم اضافه کنید

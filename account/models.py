@@ -35,6 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     User model from base
     """
     phone = models.CharField(max_length=11, unique=True, verbose_name='شماره')
+    email = models.EmailField(unique=True,null=True,blank=True,verbose_name="ایمیل")
     first_name = models.CharField(max_length=55, null=True, blank=True, verbose_name='اسم')
     last_name = models.CharField(max_length=55, null=True, blank=True, verbose_name='فامیل')
     is_active = models.BooleanField(default=True)

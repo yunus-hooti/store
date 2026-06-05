@@ -25,15 +25,21 @@ class RegisterView(UserPassesTestMixin, generic.FormView):
     form_class = CreateUserForm
     template_name = 'registration/register.html'
 
+    def get_success_url(self):
+        return reverse("account:register")
+
     def test_func(self):
         if not self.request.user.is_authenticated:
             return redirect("account:login")
         else:
             return not self.request.user.is_authenticated
 
+    def form_invalid(self, form):
+        messages.error(self.request,f"{form.errors}")
+        return super().form_invalid(form)
+
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        print(form.errors)
         if form.is_valid():
             user = User.manager.create(
                 phone=form.cleaned_data["phone"],
@@ -43,7 +49,8 @@ class RegisterView(UserPassesTestMixin, generic.FormView):
             user.save()
             login(self.request, user)
             return redirect("catalog:product_list")
-        return None
+
+        return self.form_invalid(form)
 
 
 class ProfileView(UserPassesTestMixin, generic.TemplateView):

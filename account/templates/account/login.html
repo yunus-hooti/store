@@ -52,6 +52,12 @@
   }
 
   .auth-footer a { color: #28d7b6; text-decoration: none; font-weight: 700; }
+
+  /* استایل جداکننده بین لینک‌ها */
+  .footer-separator {
+    margin: 0 8px;
+    color: #555;
+  }
 </style>
 {% endblock %}
 
@@ -87,7 +93,9 @@
   </form>
 
   <div class="auth-footer">
-    حساب ندارید؟ <a href="#">ثبت‌نام کنید</a>
+    حساب ندارید؟ <a href="{% url 'account:register' %}">ثبت‌نام کنید</a>
+    <span class="footer-separator">|</span>
+    <a href="{% url 'account:password_reset' %}">فراموشی رمز عبور؟</a>
   </div>
 </div>
 {% endblock %}
