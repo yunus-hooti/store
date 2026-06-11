@@ -456,7 +456,7 @@
           <tbody>
             {% for address in address_user %} {# فرض بر این است که address_user از view ارسال شده #}
             <tr>
-              <td>{{ address.full_name }}</td>
+              <td>{{ address.user.first_name }}  {{ address.user.last_name }}</td>
               <td>{{ address.phone_number }}</td>
               <td>{{ address.province }}</td>
               <td>{{ address.city }}</td>
