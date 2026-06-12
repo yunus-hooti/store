@@ -195,7 +195,7 @@
             <a class="btn-soft" href="{% url 'catalog:product_detail' p.id %}">
               مشاهده
             </a>
-            <form method="post" action="#" style="margin:0; flex:1;">
+            <form method="post" action="{% url 'cart:add_cart' p.id %}" style="margin:0; flex:1;">
               {% csrf_token %}
               <input type="hidden" name="product_id" value="{{ p.id }}">
               <input type="hidden" name="quantity" value="1">
