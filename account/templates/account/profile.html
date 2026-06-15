@@ -431,10 +431,10 @@
           <i class="fas fa-shopping-cart cart-icon"></i> {# آیکون سبد خرید #}
           <div class="cart-details">
             <h5>{{ cart_item_count|default:0 }} آیتم در سبد خرید</h5>
-            <p>مجموع قیمت: ...</p> {# نمایش مجموع قیمت در صورت دسترسی #}
+            <p>مجموع قیمت: {{ total_price }}</p> {# نمایش مجموع قیمت در صورت دسترسی #}
           </div>
         </div>
-        <a href="#" class="view-cart-btn">مشاهده سبد خرید</a> {# فرض بر وجود مسیر cart:view_cart #}
+        <a href="{% url 'cart:detail_cart' %}" class="view-cart-btn">مشاهده سبد خرید</a> {# فرض بر وجود مسیر cart:view_cart #}
       </div>
     </section>
 

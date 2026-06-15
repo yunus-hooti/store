@@ -105,14 +105,14 @@
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div>
-          <div style="line-height:1.1;">فروشگاه تخفیف‌دار</div>
+          <a href="{% url 'catalog:product_list' %}" ><div style="line-height:1.1;">فروشگاه تخفیف‌دار</div></a>
           <div style="color:var(--muted); font-size:13px; font-weight:600;">محصولات منتخب</div>
         </div>
       </div>
 
       <div class="nav-actions">
         <a class="pill" href="#">دسته‌بندی‌ها</a>
-        <a class="pill" href="#">سبد خرید</a>
+        <a class="pill" href="{% url 'cart:detail_cart' %}">سبد خرید</a>
         {% if user.is_authenticated %}
           <a class="pill" href="{% url 'account:profile' %}">حساب کاربری</a>
         {% else %}

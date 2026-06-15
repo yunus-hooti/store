@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.contrib.auth import logout, login
+from django.contrib import messages
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 from .models import User, AddressUser
 from .forms import CreateUserForm, AddressCreatedForm
-from django.contrib import messages
-from django.contrib.auth.mixins import UserPassesTestMixin
+from cart.cart import Cart
 
 
 # Create your views here.
@@ -68,6 +69,9 @@ class ProfileView(UserPassesTestMixin, generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['address_user'] = AddressUser.objects.filter(user=self.request.user)
+        cart = Cart(self.request)
+        context["total_price"] = cart.total_price()
+        context["cart_item_count"] = cart.get_item_count()
         return context
 
 

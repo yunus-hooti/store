@@ -13,7 +13,7 @@ class Cart:
         product_id = str(product.id)
         if product_id not in self.cart:
             if product.inventory > 0:
-                self.cart[product_id] = {'quantity': 1}
+                self.cart[product_id] = {'quantity': 1, 'weight': product.weight}
         else:
             if self.cart[product_id]['quantity'] < product.inventory:
                 self.cart[product_id]['quantity'] += 1
@@ -33,9 +33,31 @@ class Cart:
 
     def total_price(self):
         total = []
-        for i,j in self.cart.items():
+        for i, j in self.cart.items():
             total.append(Product.objects.get(id=i).price * j['quantity'])
         return sum(total)
+
+    def price_post(self):
+        total = 0
+        weight = 0
+        for i, j in self.cart.items():
+            weight += j['weight'] * j['quantity']
+        if weight == 0:
+            pass
+        elif weight <= 100:
+            total += 20000
+        elif weight <= 1000:
+            total += 50000
+        elif weight <= 5000:
+            total += 100000
+        elif weight <= 10000:
+            total += 200000
+        else:
+            total += 500000
+        return total
+
+    def all_total_price(self):
+        return self.total_price() + self.price_post()
 
     def get_item_count(self):
         return len(self.cart)

@@ -32,7 +32,9 @@ class CartDetailView(TemplateView):
         context = super().get_context_data(**kwargs)
         cart = Cart(self.request)
         context['cart'] = cart
+        context['all_total_price'] = cart.all_total_price()
         context['total_price'] = cart.total_price()
+        context['price_post'] = cart.price_post()
         return context
 
 
@@ -45,12 +47,12 @@ class CartUpdateView(View):
     def post(self, request, *args, **kwargs):  # استفاده از *args, **kwargs برای انعطاف‌پذیری بیشتر
         product_id = request.POST.get('product_id')
         action = request.POST.get('action')
+        product = get_object_or_404(Product, pk=product_id)
 
         if not product_id or not action:
             return JsonResponse({'success': False, 'error': 'Missing product_id or action'}, status=400)
 
         try:
-            product = get_object_or_404(Product, pk=product_id)
             cart = Cart(request)  # اطمینان حاصل کنید که Cart درست مقداردهی می‌شود (مثلاً با session)
 
             if action == 'add':
@@ -64,16 +66,15 @@ class CartUpdateView(View):
 
             # اطمینان حاصل کنید که این متدها وجود دارند و مقادیر صحیح برمی‌گردانند
             updated_quantity = cart.cart.get(str(product_id), {}).get('quantity', 0)
-            updated_item_total_price = cart.cart.get(str(product_id), {}).get('total_price', 0)
-            # updated_post_price_car = cart.post_price_car  # فرض می‌کنیم این متد در کلاس Cart وجود دارد
-
+            total_ = product.price * updated_quantity
             return JsonResponse({
                 'success': True,
                 'quantity': updated_quantity,
-                'item_total_price': updated_item_total_price,
-                # 'post_price_car': updated_post_price_car,
+                'price_post': cart.price_post(),
+                'total_':total_,
                 'total_price': cart.total_price(),  # فرض می‌کنیم این متد در کلاس Cart وجود دارد
                 'cart_count': len(cart.cart),
+                'all_total_price':cart.all_total_price(),
                 'action': action  # برای دیباگ مفید است
             })
 
