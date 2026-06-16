@@ -1,8 +1,10 @@
 from django.db import models
+from django.utils import timezone
 from unidecode import unidecode
 from django.utils.text import slugify
 
 from .utils import unique_slug_generator
+from coupon.models import Discount
 
 
 # Create your models here.
@@ -44,6 +46,29 @@ class Product(models.Model):
     weight = models.PositiveIntegerField(default=0, verbose_name="وزن")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_final_price(self):
+        """
+        Calculate the final price of a product or a category
+        """
+        new = timezone.now()
+        discounts = Discount.objects.filter(
+            is_active=True,
+            start_date__lte=new,
+            end_date__gte=new,
+        ).filter(
+            models.Q(apply_to='all'),
+            models.Q(apply_to='product', product=self),
+            models.Q(apply_to='category', product=self.category)
+        )
+        final_price = self.price
+        for i in discounts:
+            if i.is_active:
+                if i.discount_type == 'percent':
+                    final_price -= (self.price * i.value / 100)
+                else:
+                    final_price -= i.value
+        return max(int(final_price), 0)
 
     def save(self, *args, **kwargs):
         if not self.slug:
