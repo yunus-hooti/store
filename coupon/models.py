@@ -29,10 +29,12 @@ class Discount(models.Model):
     end_date = models.DateTimeField(null=True, blank=True)
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, verbose_name='محصول')
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE, verbose_name='دسته بندی')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def is_valid(self):
         new = timezone.now()
-        if self.start_date and self.start_date < new:
+        if self.start_date and self.start_date > new:
             return False
         if self.end_date and self.end_date > new:
             return False
@@ -62,10 +64,12 @@ class DiscountCoupon(models.Model):
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, verbose_name='محصول')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def is_valid(self):
         new = timezone.now()
-        if self.start_date and self.start_date < new:
+        if self.start_date and self.start_date > new:
             return False
         if self.end_date and self.end_date > new:
             return False
