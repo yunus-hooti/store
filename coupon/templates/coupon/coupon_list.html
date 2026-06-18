@@ -109,10 +109,10 @@
                                         <a href="{% url 'coupon:coupon_detail' discount.id %}" class="btn btn-outline-info">
                                             مشاهده
                                         </a>
-                                        <a href="#" class="btn btn-outline-primary">
+                                        <a href="{% url 'coupon:coupon_edit' discount.id %}" class="btn btn-outline-primary">
                                             ویرایش
                                         </a>
-                                        <a href="#" class="btn btn-outline-danger">
+                                        <a href="{% url 'coupon:coupon_delete' discount.id %}" class="btn btn-outline-danger">
                                             حذف
                                         </a>
                                     </div>

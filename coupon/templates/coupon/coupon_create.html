@@ -1,7 +1,7 @@
 {% extends "parent/base.html" %}
 {% load static %}
 
-{% block title %}مدیریت تخفیف{% endblock %}
+{% block title %}{% if is_edit %}ویرایش تخفیف {% else %} مدیریت تخفیف{% endif %}{% endblock %}
 
 {% block extra_head %}
 <style>
@@ -184,34 +184,34 @@
 
 {% block content %}
 <div class="form-container">
-    <h2>مدیریت تخفیف</h2>
+    <h2>{% if is_edit %}ویرایش تخفیف {% else %} مدیریت تخفیف{% endif %}</h2>
 
     {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
     {% endif %}
 
     <form method="post" id="discount-form">
         {% csrf_token %}
 
         {% if form.non_field_errors %}
-            <div class="alert alert-danger">
-                {% for error in form.non_field_errors %}
-                    <div>{{ error }}</div>
-                {% endfor %}
-            </div>
+        <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}
+            <div>{{ error }}</div>
+            {% endfor %}
+        </div>
         {% endif %}
 
         <div class="form-group">
             <label for="{{ form.title.id_for_label }}">عنوان کمپین</label>
             {{ form.title }}
             {% if form.title.errors %}
-                <div class="field-error-list">
-                    {% for error in form.title.errors %}
-                        <div class="field-error">{{ error }}</div>
-                    {% endfor %}
-                </div>
+            <div class="field-error-list">
+                {% for error in form.title.errors %}
+                <div class="field-error">{{ error }}</div>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
 
@@ -219,11 +219,11 @@
             <label for="{{ form.apply_to.id_for_label }}">اعمال تخفیف روی</label>
             {{ form.apply_to }}
             {% if form.apply_to.errors %}
-                <div class="field-error-list">
-                    {% for error in form.apply_to.errors %}
-                        <div class="field-error">{{ error }}</div>
-                    {% endfor %}
-                </div>
+            <div class="field-error-list">
+                {% for error in form.apply_to.errors %}
+                <div class="field-error">{{ error }}</div>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
 
@@ -231,11 +231,11 @@
             <label for="{{ form.category.id_for_label }}">دسته بندی</label>
             {{ form.category }}
             {% if form.category.errors %}
-                <div class="field-error-list">
-                    {% for error in form.category.errors %}
-                        <div class="field-error">{{ error }}</div>
-                    {% endfor %}
-                </div>
+            <div class="field-error-list">
+                {% for error in form.category.errors %}
+                <div class="field-error">{{ error }}</div>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
 
@@ -243,11 +243,11 @@
             <label for="{{ form.product.id_for_label }}">محصول</label>
             {{ form.product }}
             {% if form.product.errors %}
-                <div class="field-error-list">
-                    {% for error in form.product.errors %}
-                        <div class="field-error">{{ error }}</div>
-                    {% endfor %}
-                </div>
+            <div class="field-error-list">
+                {% for error in form.product.errors %}
+                <div class="field-error">{{ error }}</div>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
 
@@ -256,22 +256,22 @@
                 <label for="{{ form.value.id_for_label }}">مقدار تخفیف</label>
                 {{ form.value }}
                 {% if form.value.errors %}
-                    <div class="field-error-list">
-                        {% for error in form.value.errors %}
-                            <div class="field-error">{{ error }}</div>
-                        {% endfor %}
-                    </div>
+                <div class="field-error-list">
+                    {% for error in form.value.errors %}
+                    <div class="field-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
                 {% endif %}
             </div>
             <div style="flex:1">
                 <label for="{{ form.discount_type.id_for_label }}">نوع تخفیف</label>
                 {{ form.discount_type }}
                 {% if form.discount_type.errors %}
-                    <div class="field-error-list">
-                        {% for error in form.discount_type.errors %}
-                            <div class="field-error">{{ error }}</div>
-                        {% endfor %}
-                    </div>
+                <div class="field-error-list">
+                    {% for error in form.discount_type.errors %}
+                    <div class="field-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -280,11 +280,11 @@
             {{ form.is_active }}
             <label for="{{ form.is_active.id_for_label }}" class="checkbox-label">فعال بودن تخفیف</label>
             {% if form.is_active.errors %}
-                <div class="field-error-list">
-                    {% for error in form.is_active.errors %}
-                        <div class="field-error">{{ error }}</div>
-                    {% endfor %}
-                </div>
+            <div class="field-error-list">
+                {% for error in form.is_active.errors %}
+                <div class="field-error">{{ error }}</div>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
 
@@ -292,43 +292,43 @@
             <div style="flex:1">
                 <label for="{{ form.start_date.id_for_label }}">تاریخ و زمان شروع</label>
                 <input
-                    type="datetime-local"
-                    name="{{ form.start_date.html_name }}"
-                    id="{{ form.start_date.id_for_label }}"
-                    value="{% if form.start_date.value %}{{ form.start_date.value|date:'Y-m-d\\TH:i' }}{% endif %}"
-                    step="60"
-                    autocomplete="off"
+                        type="datetime-local"
+                        name="{{ form.start_date.html_name }}"
+                        id="{{ form.start_date.id_for_label }}"
+                        value="{% if form.start_date.value %}{{ form.start_date.value|date:'Y-m-d\\TH:i' }}{% endif %}"
+                        step="60"
+                        autocomplete="off"
                 >
                 {% if form.start_date.errors %}
-                    <div class="field-error-list">
-                        {% for error in form.start_date.errors %}
-                            <div class="field-error">{{ error }}</div>
-                        {% endfor %}
-                    </div>
+                <div class="field-error-list">
+                    {% for error in form.start_date.errors %}
+                    <div class="field-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
                 {% endif %}
             </div>
 
             <div style="flex:1">
                 <label for="{{ form.end_date.id_for_label }}">تاریخ و زمان پایان</label>
                 <input
-                    type="datetime-local"
-                    name="{{ form.end_date.html_name }}"
-                    id="{{ form.end_date.id_for_label }}"
-                    value="{% if form.end_date.value %}{{ form.end_date.value|date:'Y-m-d\\TH:i' }}{% endif %}"
-                    step="60"
-                    autocomplete="off"
+                        type="datetime-local"
+                        name="{{ form.end_date.html_name }}"
+                        id="{{ form.end_date.id_for_label }}"
+                        value="{% if form.end_date.value %}{{ form.end_date.value|date:'Y-m-d\\TH:i' }}{% endif %}"
+                        step="60"
+                        autocomplete="off"
                 >
                 {% if form.end_date.errors %}
-                    <div class="field-error-list">
-                        {% for error in form.end_date.errors %}
-                            <div class="field-error">{{ error }}</div>
-                        {% endfor %}
-                    </div>
+                <div class="field-error-list">
+                    {% for error in form.end_date.errors %}
+                    <div class="field-error">{{ error }}</div>
+                    {% endfor %}
+                </div>
                 {% endif %}
             </div>
         </div>
 
-        <button type="submit" class="btn-submit">ذخیره تخفیف</button>
+        <button type="submit" class="btn-submit">{% if is_edit %}ثبت تغییرات {% else %} ذخیره تخفیف{% endif %}</button>
     </form>
 </div>
 

@@ -1,0 +1,24 @@
+{% extends 'parent/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm border-0" style="max-width: 500px; margin: auto;">
+        <div class="card-body p-4 text-center">
+            <h4 class="card-title mb-3">تأیید حذف تخفیف</h4>
+            <p class="card-text">
+                آیا واقعاً می‌خواهید تخفیف <strong>{{ object }}</strong> را حذف کنید؟ 
+                <br>
+                <small class="text-danger">این عملیات قابل بازگشت نیست.</small>
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="{% url 'coupon:coupon_list' %}" class="btn btn-secondary px-4">انصراف</a>
+                    <button type="submit" class="btn btn-danger px-4">بله، حذف کن</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -4,7 +4,7 @@ from django.views import generic
 from django.urls import reverse_lazy, reverse
 
 from .models import Product, Category, Feature, Images
-
+from coupon.views import discount_products
 
 # Create your views here.
 
@@ -17,6 +17,10 @@ class ProductListView(generic.ListView):
     template_name = 'catalog/product_list.html'
     paginate_by = 10
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = discount_products(Product.objects.all())
+        return context
 
 class ProductDetailView(generic.DetailView):
     """
