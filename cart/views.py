@@ -6,7 +6,7 @@ from django.http import JsonResponse
 
 from .cart import Cart
 from catalog.models import Product
-
+from coupon.views import discount_products
 
 # Create your views here.
 
@@ -66,7 +66,15 @@ class CartUpdateView(View):
 
             # اطمینان حاصل کنید که این متدها وجود دارند و مقادیر صحیح برمی‌گردانند
             updated_quantity = cart.cart.get(str(product_id), {}).get('quantity', 0)
-            total_ = product.price * updated_quantity
+            product_ids = cart.cart.keys()
+            products = Product.objects.filter(id__in=product_ids)
+            discount_products_list = discount_products(products)
+            product_map = {str(p.id): p for p in discount_products_list}
+            current_product = product_map.get(str(product_id))
+            if current_product:
+                total_ = current_product.price * updated_quantity
+            else:
+                total_ = 0
             return JsonResponse({
                 'success': True,
                 'quantity': updated_quantity,

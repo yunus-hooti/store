@@ -1,5 +1,5 @@
 from catalog.models import Product
-
+from coupon.views import discount_products
 
 class Cart:
     def __init__(self, request):
@@ -13,7 +13,11 @@ class Cart:
         product_id = str(product.id)
         if product_id not in self.cart:
             if product.inventory > 0:
-                self.cart[product_id] = {'quantity': 1, 'weight': product.weight}
+                old_price = product.price
+                price = self.product_discount(product.id)
+
+                self.cart[product_id] = {'quantity': 1, 'weight': product.weight, 'price': price[0].price,
+                                         'old_price': str(old_price)}
         else:
             if self.cart[product_id]['quantity'] < product.inventory:
                 self.cart[product_id]['quantity'] += 1
@@ -31,10 +35,14 @@ class Cart:
             del self.cart[product_id]
             self.save()
 
+    def product_discount(self, product_id):
+        return discount_products([Product.objects.get(id=product_id)])
+
     def total_price(self):
         total = []
         for i, j in self.cart.items():
-            total.append(Product.objects.get(id=i).price * j['quantity'])
+            product_d = self.product_discount(i)
+            total.append(product_d[0].price * j['quantity'])
         return sum(total)
 
     def price_post(self):
@@ -65,11 +73,16 @@ class Cart:
     def __iter__(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
+        products_discount_list = discount_products(list(products))
+        products_map = {str(p.id): p for p in products_discount_list}
         cart_copy = self.cart.copy()
-        for product in products:
-            cart_copy[str(product.id)]['product'] = product
         for i, item in cart_copy.items():
-            item['total'] = products.get(id=i).price * item['quantity']
+            product = products_map.get(i)
+            if product:
+                item['product'] = product
+                item['total'] = product.price * item['quantity']
+            else:
+                item['total'] = 0
             yield item
 
     def save(self):

@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
@@ -48,10 +47,19 @@ class CouponCreate(UserPassesTestMixin, generic.CreateView):
     success_url = reverse_lazy('catalog:product_list')
 
     def form_valid(self, form):
-        apply_to = form.cleaned_data['apply_to']
-        if Discount.objects.filter(apply_to=apply_to).exists():
-            messages.success(self.request, 'این نوع تخفیف برای کالا یا کل وجود دارد ')
-            return self.form_invalid(form)
+        cd = form.cleaned_data
+        apply_to = cd['apply_to']
+        if apply_to == 'all':
+            if Discount.objects.filter(apply_to='all').exists():
+                messages.success(self.request, 'قبلاً یک تخفیف سراسری ثبت شده')
+                return self.form_invalid(form)
+        elif apply_to == 'category':
+            if Discount.objects.filter(apply_to='category', category=cd['category']).exists():
+                messages.success(self.request, 'برای این دسته قبلاً تخغیف ثبت شده')
+        elif apply_to == 'product':
+            if Discount.objects.filter(apply_to='product', product=cd['product']).exists():
+                messages.success(self.request, 'رای این محصول قبلاً تخغیف ثبت شده')
+
         messages.success(self.request, 'تخفیف با موفقیت ثبت شد ')
         return super().form_valid(form)
 
@@ -82,11 +90,13 @@ def discount_products(list_product):
         if discount.apply_to == 'all':
             for i in list_product:
                 if discount.discount_type == 'percent':
+                    i.old_price = i.price
                     discount_amount = (i.price * discount.value) // 100
                     i.price = i.price - discount_amount
                 elif discount.discount_type == 'amount':
                     discount_amount = i.price - discount.value
                     if discount_amount > 0:
+                        i.old_price = i.price
                         i.price = discount_amount
                 list_product_discount.append(i)
             break
@@ -95,29 +105,33 @@ def discount_products(list_product):
             for i in list_product:
                 if discount.product == i:
                     if discount.discount_type == 'percent':
+                        i.old_price = i.price
                         discount_amount = i.price - ((i.price * discount.value) // 100)
                         i.price = discount_amount
-                elif discount.discount_type == 'amount':
-                    discount_amount = i.price - discount.value
-                    if discount_amount > 0:
-                        i.price = discount_amount
-
-                list_product_discount.append(i)
+                    elif discount.discount_type == 'amount':
+                        discount_amount = i.price - discount.value
+                        if discount_amount > 0:
+                            i.old_price = i.price
+                            i.price = discount_amount
+                if i not in list_product:
+                    list_product_discount.append(i)
 
         elif discount.apply_to == 'category':
             for i in list_product:
                 if i.category == discount.category:
                     if discount.discount_type == 'percent':
+                        i.old_price = i.price
                         discount_amount = (i.price * discount.value) / 100
                         i.price = discount_amount
                     elif discount.discount_type == 'amount':
                         discount_amount = i.price - discount.value
                         if discount_amount > 0:
+                            i.old_price = i.price
                             i.price = discount_amount
-
-                list_product_discount.append(i)
+                    list_product_discount.append(i)
+    if list_product_discount:
+        return list_product_discount
     return list_product
-
 
 class DeleteCoupon(UserPassesTestMixin, generic.DeleteView):
     """

@@ -1,5 +1,4 @@
 {% extends 'parent/base.html' %}
-{% load static %}
 
 {% block title %}سبد خرید شما{% endblock %}
 
@@ -9,15 +8,29 @@
 
     <div id="cart-items-list" class="grid" style="gap: 24px;">
         {% for item in cart %}
-        <div id="item-row-{{ item.product.id }}" class="grid" style="grid-column: span 12; background: var(--card); padding: 18px; border-radius: var(--radius); border: 1px solid var(--border); align-items: center;">
+        <div id="item-row-{{ item.product.id }}" class="grid"
+             style="grid-column: span 12; background: var(--card); padding: 18px; border-radius: var(--radius); border: 1px solid var(--border); align-items: center;">
 
             <div style="grid-column: span 2;">
-                <img src="{{ item.product.images.first.image.url }}" style="width: 100%; border-radius: 12px; aspect-ratio: 1/1; object-fit: cover;">
+                <img src="{{ item.product.images.first.image.url }}"
+                     style="width: 100%; border-radius: 12px; aspect-ratio: 1/1; object-fit: cover;">
             </div>
 
             <div style="grid-column: span 4;">
                 <div style="font-weight: 700; font-size: 18px;">{{ item.product.name }}</div>
-                <div style="color: var(--muted); margin-top: 4px;">{{ item.product.price }} تومان</div>
+                <!-- بخش اصلاح شده برای نمایش قیمت تخفیف خورده -->
+                <div style="margin-top: 4px;">
+                    {% if item.price and item.product.old_price > item.price %}
+                    <span style="text-decoration: line-through; color: var(--muted); font-size: 14px; margin-left: 8px;">
+                            {{ item.old_price }} تومان
+                        </span>
+                    <span style="color: var(--danger); font-weight: 700;">
+                            {{ item.product.price }} تومان
+                        </span>
+                    {% else %}
+                    <div style="color: var(--muted);">{{ item.product.price }} تومان</div>
+                    {% endif %}
+                </div>
             </div>
 
             <div style="grid-column: span 3; display: flex; align-items: center; gap: 12px;">
@@ -30,7 +43,8 @@
                 <span id="total-{{ item.product.id }}">{{ item.total }}</span> <small>تومان</small>
             </div>
 
-            <button class="btn" style="grid-column: span 1; background: var(--danger); border-color: transparent;" onclick="updateQty('{{ item.product.id }}', 'remove')">
+            <button class="btn" style="grid-column: span 1; background: var(--danger); border-color: transparent;"
+                    onclick="updateQty('{{ item.product.id }}', 'remove')">
                 حذف
             </button>
         </div>
@@ -58,8 +72,8 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
     function updateQty(productId, action) {
@@ -83,7 +97,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
                 document.getElementById("post-price").innerText = data.price_post;
                 document.getElementById("all-total-price").innerText = data.all_total_price;
-                document.getElementById("total-price").innerText = data.total_price;
+                // نکته: در کد اصلی شما total-price وجود داشت که در HTML نبود،
+                // اگر در جای دیگری از صفحه هست آن را نگه دارید.
+                const totalElem = document.getElementById("total-price");
+                if(totalElem) totalElem.innerText = data.total_price;
             }
         })
         .catch(err => console.error("Cart update error:", err));

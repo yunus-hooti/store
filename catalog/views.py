@@ -1,7 +1,5 @@
-
 from django.shortcuts import render, redirect
 from django.views import generic
-from django.urls import reverse_lazy, reverse
 
 from .models import Product, Category, Feature, Images
 from coupon.views import discount_products
@@ -30,6 +28,12 @@ class ProductDetailView(generic.DetailView):
     template_name = 'catalog/product_detail.html'
     context_object_name = "product"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs['pk']
+        product = Product.objects.get(pk=pk)
+        context['product'] = discount_products([product])[0]
+        return context
 
 class CreateProductView(generic.TemplateView):
     """
