@@ -26,23 +26,23 @@
                             <h5 class="fw-bold mb-1">{{ discount.title }}</h5>
                             <div class="d-flex gap-2 flex-wrap">
                                 {% if discount.is_active %}
-                                    <span class="badge bg-success">فعال</span>
+                                <span class="badge bg-success">فعال</span>
                                 {% else %}
-                                    <span class="badge bg-danger">غیرفعال</span>
+                                <span class="badge bg-danger">غیرفعال</span>
                                 {% endif %}
 
                                 {% if discount.discount_type == 'percent' %}
-                                    <span class="badge bg-info text-dark">درصدی</span>
+                                <span class="badge bg-info text-dark">درصدی</span>
                                 {% else %}
-                                    <span class="badge bg-warning text-dark">مبلغی</span>
+                                <span class="badge bg-warning text-dark">مبلغی</span>
                                 {% endif %}
 
                                 {% if discount.apply_to == 'all' %}
-                                    <span class="badge bg-primary">همه محصولات</span>
+                                <span class="badge bg-primary">همه محصولات</span>
                                 {% elif discount.apply_to == 'product' %}
-                                    <span class="badge bg-secondary">محصول خاص</span>
+                                <span class="badge bg-secondary">محصول خاص</span>
                                 {% elif discount.apply_to == 'category' %}
-                                    <span class="badge bg-dark">دسته خاص</span>
+                                <span class="badge bg-dark">دسته خاص</span>
                                 {% endif %}
                             </div>
                         </div>
@@ -56,9 +56,9 @@
                                 <small class="text-muted d-block">مقدار تخفیف</small>
                                 <strong>
                                     {% if discount.discount_type == 'percent' %}
-                                        {{ discount.value }}٪
+                                    {{ discount.value }}٪
                                     {% else %}
-                                        {{ discount.value }} تومان
+                                    {{ discount.value }} تومان
                                     {% endif %}
                                 </strong>
                             </div>
@@ -68,12 +68,20 @@
                             <div class="p-3 bg-light rounded">
                                 <small class="text-muted d-block">دامنه اعمال</small>
                                 <strong>
-                                    {% if discount.apply_to == 'all' %}
-                                        همه محصولات
-                                    {% elif discount.apply_to == 'product' %}
-                                        فقط یک محصول
-                                    {% elif discount.apply_to == 'category' %}
-                                        فقط یک دسته
+                                    {% if discount.title %}
+                                        {% if discount.apply_to == 'all' %}
+                                    همه محصولات
+                                        {% elif discount.apply_to == 'product' %}
+                                    فقط یک محصول
+                                        {% elif discount.apply_to == 'category' %}
+                                    فقط یک دسته
+                                        {% endif %}
+                                    {% else %}
+                                        {% if discount.apply_to == 'cart' %}
+                                    سبد خرید
+                                        {% elif discount.apply_to == 'product' %}
+                                           فقط یک محصول
+                                        {% endif %}
                                     {% endif %}
                                 </strong>
                             </div>
@@ -84,9 +92,9 @@
                                 <small class="text-muted d-block">تاریخ شروع</small>
                                 <strong>
                                     {% if discount.start_date %}
-                                        {{ discount.start_date|date:"Y/m/d H:i" }}
+                                    {{ discount.start_date|date:"Y/m/d H:i" }}
                                     {% else %}
-                                        -
+                                    -
                                     {% endif %}
                                 </strong>
                             </div>
@@ -97,9 +105,9 @@
                                 <small class="text-muted d-block">تاریخ پایان</small>
                                 <strong>
                                     {% if discount.end_date %}
-                                        {{ discount.end_date|date:"Y/m/d H:i" }}
+                                    {{ discount.end_date|date:"Y/m/d H:i" }}
                                     {% else %}
-                                        -
+                                    -
                                     {% endif %}
                                 </strong>
                             </div>
@@ -107,21 +115,21 @@
                     </div>
 
                     {% if discount.apply_to == 'product' and discount.product %}
-                        <hr>
-                        <div class="mt-3">
-                            <small class="text-muted d-block mb-1">محصول مرتبط</small>
-                            <a href="{% url 'catalog:product_detail' discount.product.id %}" class="text-decoration-none">
-                                {{ discount.product.name }}
-                            </a>
-                        </div>
+                    <hr>
+                    <div class="mt-3">
+                        <small class="text-muted d-block mb-1">محصول مرتبط</small>
+                        <a href="{% url 'catalog:product_detail' discount.product.id %}" class="text-decoration-none">
+                            {{ discount.product.name }}
+                        </a>
+                    </div>
                     {% endif %}
 
                     {% if discount.apply_to == 'category' and discount.category %}
-                        <hr>
-                        <div class="mt-3">
-                            <small class="text-muted d-block mb-1">دسته مرتبط</small>
-                            <span>{{ discount.category.name }}</span>
-                        </div>
+                    <hr>
+                    <div class="mt-3">
+                        <small class="text-muted d-block mb-1">دسته مرتبط</small>
+                        <span>{{ discount.category.name }}</span>
+                    </div>
                     {% endif %}
                 </div>
             </div>
@@ -142,9 +150,9 @@
                             <span>وضعیت</span>
                             <strong>
                                 {% if discount.is_active %}
-                                    فعال
+                                فعال
                                 {% else %}
-                                    غیرفعال
+                                غیرفعال
                                 {% endif %}
                             </strong>
                         </li>
@@ -152,9 +160,9 @@
                             <span>نوع تخفیف</span>
                             <strong>
                                 {% if discount.discount_type == 'percent' %}
-                                    درصدی
+                                درصدی
                                 {% else %}
-                                    مبلغی
+                                مبلغی
                                 {% endif %}
                             </strong>
                         </li>
@@ -162,11 +170,11 @@
                             <span>اعمال روی</span>
                             <strong>
                                 {% if discount.apply_to == 'all' %}
-                                    همه محصولات
+                                همه محصولات
                                 {% elif discount.apply_to == 'product' %}
-                                    محصول خاص
+                                محصول خاص
                                 {% elif discount.apply_to == 'category' %}
-                                    دسته خاص
+                                دسته خاص
                                 {% endif %}
                             </strong>
                         </li>

@@ -1,0 +1,368 @@
+{% extends "parent/base.html" %}
+{% load static %} {# اگر نیاز به فایل‌های استاتیک دارید #}
+
+{% block title %}مدیریت کد تخفیف{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* استایل‌های کلی فرم */
+    .form-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    h2 {
+        margin-bottom: 25px;
+        font-weight: 900;
+        color: #fff;
+        text-align: center;
+        letter-spacing: 0.5px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    /* استایل برای لیبل ها */
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 800;
+        color: #ccc;
+    }
+    /* استایل برای لیبل های چک باکس در کنار فیلد */
+    .checkbox-label {
+        display: inline-block;
+        margin-left: 10px; /* فاصله از چک باکس */
+        margin-bottom: 0; /* حذف مارجین پایین */
+        font-weight: 800;
+        color: #ccc;
+        cursor: pointer; /* نشانگر موس */
+    }
+
+
+    .inline-flex {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start; /* شروع هم ترازی */
+    }
+    .inline-flex > div { flex: 1; } /* برای توزیع فضا */
+
+    /* رنگ بهتر و خواناتر برای فیلدها */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"], /* اضافه شده برای date picker */
+    input[type="datetime-local"], /* اضافه شده برای datetime picker */
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 12px;
+        background: #050810;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+        outline: none;
+    }
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #8a7afc;
+        box-shadow: 0 0 0 4px rgba(138, 122, 252, 0.25);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* آیکون تقویم در ورودی‌های datetime-local (پیش‌فرض روی پس‌زمینه تیره دیده نمی‌شود) */
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        opacity: 0.85;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 6px;
+    }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* استایل چک باکس */
+    input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 6px;
+        background-color: transparent;
+        cursor: pointer;
+        position: relative;
+        display: inline-block; /* برای هم ترازی با لیبل */
+        vertical-align: middle; /* هم ترازی عمودی */
+        transition: all 0.2s ease;
+    }
+    input[type="checkbox"]:checked {
+        background-color: #8a7afc; /* رنگ فعال */
+        border-color: #8a7afc;
+    }
+    input[type="checkbox"]:checked::after {
+        content: '✔'; /* تیک */
+        font-size: 12px;
+        font-weight: bold;
+        color: #fff;
+        position: absolute;
+        top: 0px;
+        left: 2px;
+    }
+
+
+    .btn-icon {
+        padding: 12px 18px;
+        border-radius: 12px;
+        border: none;
+        background: #8a7afc;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 900;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        transition: background 0.2s ease;
+    }
+    .btn-icon:hover { background: #9a8afc; }
+
+    .btn-remove-attr { background: #ff7f8d; }
+    .btn-remove-attr:hover { background: #ff9f9d; }
+
+    .btn-submit {
+        width: 100%;
+        padding: 15px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 14px;
+        font-weight: 900;
+        background: linear-gradient(135deg, #8a7afc, #b4a7ff);
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: all 0.2s ease;
+    }
+    .btn-submit:hover {
+        box-shadow: 0 10px 25px rgba(138, 122, 252, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .field-error-list {
+        margin-top: 5px;
+        margin-bottom: 15px;
+        font-size: 0.85rem;
+        color: #ff8f98;
+    }
+    .field-error { color: #ff8f98; }
+
+    .alert {
+        padding: 12px 18px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        color: #06131d;
+        border: none;
+    }
+    .alert-info { background: #90e0f0; }
+    .alert-danger { background: #ff8f98; }
+    .alert-success { background: #98e8b8; }
+    .alert-warning { background: #ffcc98; }
+
+    .hidden-field { display: none !important; }
+
+    /* استایل برای calendar/date picker */
+    .datepicker-container {
+        position: relative;
+    }
+    .ui-datepicker-trigger {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #ccc;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>مدیریت کد تخفیف</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" id="discount-coupon-form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    <span>{{ error }}</span><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {# فیلد coupon - کد کوپن #}
+        <div class="form-group">
+            <label for="{{ form.coupon.id_for_label }}">کد کوپن</label>
+            {{ form.coupon }}
+            {% if form.coupon.errors %}
+                <div class="field-error-list">
+                    {% for error in form.coupon.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {# فیلد apply_to - اعمال روی #}
+        <div class="form-group">
+            <label for="{{ form.apply_to.id_for_label }}">اعمال تخفیف روی</label>
+            <div class="inline-flex">
+                {{ form.apply_to }}
+            </div>
+            {% if form.apply_to.errors %}
+                <div class="field-error-list">
+                    {% for error in form.apply_to.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {# فیلد product - فقط زمانی که apply_to روی "product" باشد نمایش داده می‌شود #}
+        <div class="form-group {% if form.apply_to.value != 'product' %}hidden-field{% endif %}" id="product-field">
+            <label for="{{ form.product.id_for_label }}">محصول</label>
+            <div class="inline-flex">
+                {{ form.product }}
+            </div>
+            {% if form.product.errors %}
+                <div class="field-error-list">
+                    {% for error in form.product.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group inline-flex">
+            <div style="flex:1">
+                <label for="{{ form.discount_type.id_for_label }}">نوع تخفیف</label>
+                {{ form.discount_type }}
+                {% if form.discount_type.errors %}
+                    <div class="field-error-list">
+                        {% for error in form.discount_type.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div style="flex:2">
+                <label for="{{ form.value.id_for_label }}">مقدار تخفیف</label>
+                {{ form.value }}
+                {% if form.value.errors %}
+                    <div class="field-error-list">
+                        {% for error in form.value.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {# فیلد is_active - چک باکس در کنار لیبل #}
+        <div class="form-group" style="display: flex; align-items: center;">
+            {{ form.is_active }} {# چک باکس #}
+            <label for="{{ form.is_active.id_for_label }}" class="checkbox-label">فعال بودن کوپن</label>
+            {% if form.is_active.errors %}
+                <div class="field-error-list">
+                    {% for error in form.is_active.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group inline-flex">
+            {# فیلد تاریخ شروع - ورودی datetime-local (mm/dd/yyyy , --:--) #}
+            <div style="flex:1" class="datepicker-container">
+                <label for="{{ form.start_date.id_for_label }}">تاریخ و زمان شروع</label>
+                <input
+                    type="datetime-local"
+                    name="{{ form.start_date.html_name }}"
+                    id="{{ form.start_date.id_for_label }}"
+                    {% if form.start_date.value %}value="{{ form.start_date.value|date:'Y-m-d\TH:i' }}"{% endif %}
+                >
+                {% if form.start_date.errors %}
+                    <div class="field-error-list">
+                        {% for error in form.start_date.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            {# فیلد تاریخ پایان - ورودی datetime-local (mm/dd/yyyy , --:--) #}
+            <div style="flex:1" class="datepicker-container">
+                <label for="{{ form.end_date.id_for_label }}">تاریخ و زمان پایان</label>
+                <input
+                    type="datetime-local"
+                    name="{{ form.end_date.html_name }}"
+                    id="{{ form.end_date.id_for_label }}"
+                    {% if form.end_date.value %}value="{{ form.end_date.value|date:'Y-m-d\TH:i' }}"{% endif %}
+                >
+                {% if form.end_date.errors %}
+                    <div class="field-error-list">
+                        {% for error in form.end_date.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-actions" style="margin-top: 30px;">
+            <button type="button" class="btn-icon" style="background:#ff7f8d; margin-right: auto;" onclick="window.history.back();">انصراف</button>
+            <button type="submit" class="btn-submit">ذخیره کوپن</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function toggleProductField() {
+        const applyToSelect = document.getElementById('{{ form.apply_to.id_for_label }}');
+        const productFieldDiv = document.getElementById('product-field');
+
+        if (!applyToSelect) return;
+
+        const selectedValue = applyToSelect.value;
+
+        if (selectedValue === 'product') {
+            productFieldDiv.classList.remove('hidden-field');
+        } else {
+            productFieldDiv.classList.add('hidden-field');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        toggleProductField();
+        const applyToSelect = document.getElementById('{{ form.apply_to.id_for_label }}');
+        if (applyToSelect) {
+            applyToSelect.addEventListener('change', toggleProductField);
+        }
+    });
+
+    // !!! نکته مهم برای تاریخ شمسی !!!
+    // برای فعال کردن تاریخ شمسی، باید کتابخانه جاوا اسکریپت مناسب (مانند ParsiDate یا PersianDate)
+    // و فایل‌های CSS آن را به بخش head قالب اصلی (base.html) یا به block extra_head اینجا اضافه کنید.
+    // سپس کد جاوا اسکریپت لازم را برای فعال کردن date picker برای فیلدهای start_date و end_date اضافه کنید.
+
+    // مثال (jQuery + کتابخانه persianDatepicker):
+    /*
+    $(document).ready(function() {
+        $("#id_start_date").persianDatepicker({
+            format: "YYYY/MM/DD",
+            autoClose: true,
+        });
+        $("#id_end_date").persianDatepicker({
+            format: "YYYY/MM/DD",
+            autoClose: true,
+        });
+    });
+    */
+</script>
+{% endblock %}

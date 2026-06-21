@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.utils import timezone
 
-from .models import Discount
+from .models import Discount, DiscountCoupon
 
 
 # Create your views here.
@@ -22,6 +22,11 @@ class CouponList(UserPassesTestMixin, generic.ListView):
     def test_func(self):
         return self.request.user.is_superuser
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['discount_coupon'] = DiscountCoupon.objects.all()
+        return context
+
 
 class CouponDetail(UserPassesTestMixin, generic.DetailView):
     """
@@ -35,6 +40,17 @@ class CouponDetail(UserPassesTestMixin, generic.DetailView):
     def test_func(self):
         return self.request.user.is_superuser
 
+class DiscountCouponDetail(UserPassesTestMixin, generic.DetailView):
+    """
+    detail coupon
+    """
+    model = DiscountCoupon
+    context_object_name = 'discount'
+    template_name = 'coupon/coupon_detail.html'
+    success_url = reverse_lazy('catalog:product_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 class CouponCreate(UserPassesTestMixin, generic.CreateView):
     """
@@ -133,6 +149,7 @@ def discount_products(list_product):
         return list_product_discount
     return list_product
 
+
 class DeleteCoupon(UserPassesTestMixin, generic.DeleteView):
     """
     delete coupon
@@ -144,6 +161,16 @@ class DeleteCoupon(UserPassesTestMixin, generic.DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
+class DeleteDiscountCoupon(UserPassesTestMixin, generic.DeleteView):
+    """
+    delete coupon
+    """
+    model = DiscountCoupon
+    template_name = 'coupon/ok_delete_coupon.html'
+    success_url = reverse_lazy('coupon:coupon_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 class EditCoupon(UserPassesTestMixin, generic.UpdateView):
     """
@@ -161,3 +188,42 @@ class EditCoupon(UserPassesTestMixin, generic.UpdateView):
         context = super().get_context_data(**kwargs)
         context['is_edit'] = True
         return context
+
+
+class EditDiscountCoupon(UserPassesTestMixin, generic.UpdateView):
+    """
+    edit coupon
+    """
+    model = DiscountCoupon
+    template_name = 'coupon/discountcoupon_create.html'
+    fields = '__all__'
+    success_url = reverse_lazy('coupon:coupon_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_edit'] = True
+        return context
+
+
+class UserDiscountCouponView(UserPassesTestMixin, generic.CreateView):
+    model = DiscountCoupon
+    template_name = 'coupon/discountcoupon_create.html'
+    context_object_name = 'discount'
+    fields = '__all__'
+    success_url = reverse_lazy('coupon:coupon_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def form_valid(self, form):
+        cd = form.cleaned_data
+        coupon = cd['coupon']
+        if DiscountCoupon.objects.filter(coupon=coupon).exists():
+            messages.success(self.request, 'قبلاً یک تخفیف با این کد کوپن ساخته شده ثبت شده')
+            return self.form_invalid(form)
+
+        messages.success(self.request, 'تخفیف با موفقیت ثبت شد ')
+        return super().form_valid(form)

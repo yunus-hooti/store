@@ -18,16 +18,22 @@
                 افزودن تخفیف
             </a>
         </div>
+        <div class="d-flex gap-2 mt-3 mt-md-0">
+            <a href="{% url 'coupon:coupon_create_user' %}" class="btn btn-primary">
+                <i class="bi bi-plus-lg me-1"></i>
+                افزودن کوپن تخفیف
+            </a>
+        </div>
     </div>
 
     <!-- Alerts -->
     {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        {% endfor %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
     {% endif %}
 
     <!-- Table Card -->
@@ -36,100 +42,199 @@
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
-                        <tr>
-                            <th class="px-3">#</th>
-                            <th>عنوان</th>
-                            <th>نوع تخفیف</th>
-                            <th>دامنه اعمال</th>
-                            <th>مقدار</th>
-                            <th>وضعیت</th>
-                            <th>شروع</th>
-                            <th>پایان</th>
-                            <th class="text-center">عملیات</th>
-                        </tr>
+                    <tr>
+                        <th class="px-3">#</th>
+                        <th>عنوان</th>
+                        <th>نوع تخفیف</th>
+                        <th>دامنه اعمال</th>
+                        <th>مقدار</th>
+                        <th>وضعیت</th>
+                        <th>شروع</th>
+                        <th>پایان</th>
+                        <th class="text-center">عملیات</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {% for discount in discounts %}
-                            <tr>
-                                <td class="px-3">{{ forloop.counter }}</td>
-                                <td class="fw-semibold">{{ discount.title }}</td>
+                    {% for discount in discounts %}
+                    <tr>
+                        <td class="px-3">{{ forloop.counter }}-</td>
+                        <td class="fw-semibold">{{ discount.title }}</td>
 
-                                <td>
-                                    {% if discount.discount_type == 'percent' %}
-                                        <span class="badge bg-info text-dark">درصدی</span>
-                                    {% else %}
-                                        <span class="badge bg-warning text-dark">مبلغی</span>
-                                    {% endif %}
-                                </td>
+                        <td>
+                            {% if discount.discount_type == 'percent' %}
+                            <span class="badge bg-info text-dark">درصدی</span>
+                            {% else %}
+                            <span class="badge bg-warning text-dark">مبلغی</span>
+                            {% endif %}
+                        </td>
 
-                                <td>
-                                    {% if discount.apply_to == 'all' %}
-                                        <span class="badge bg-success">همه محصولات</span>
-                                    {% elif discount.apply_to == 'product' %}
-                                        <span class="badge bg-primary">محصول خاص</span>
-                                    {% elif discount.apply_to == 'category' %}
-                                        <span class="badge bg-secondary">دسته خاص</span>
-                                    {% endif %}
-                                </td>
+                        <td>
+                            {% if discount.apply_to == 'all' %}
+                            <span class="badge bg-success">همه محصولات</span>
+                            {% elif discount.apply_to == 'product' %}
+                            <span class="badge bg-primary">محصول خاص</span>
+                            {% elif discount.apply_to == 'category' %}
+                            <span class="badge bg-secondary">دسته خاص</span>
+                            {% endif %}
+                        </td>
 
-                                <td>
-                                    {% if discount.discount_type == 'percent' %}
-                                        {{ discount.value }}٪
-                                    {% else %}
-                                        {{ discount.value }} تومان
-                                    {% endif %}
-                                </td>
+                        <td>
+                            {% if discount.discount_type == 'percent' %}
+                            {{ discount.value }}٪
+                            {% else %}
+                            {{ discount.value }} تومان
+                            {% endif %}
+                        </td>
 
-                                <td>
-                                    {% if discount.is_active %}
-                                        <span class="badge bg-success">فعال</span>
-                                    {% else %}
-                                        <span class="badge bg-danger">غیرفعال</span>
-                                    {% endif %}
-                                </td>
+                        <td>
+                            {% if discount.is_active %}
+                            <span class="badge bg-success">فعال</span>
+                            {% else %}
+                            <span class="badge bg-danger">غیرفعال</span>
+                            {% endif %}
+                        </td>
 
-                                <td>
-                                    {% if discount.start_date %}
-                                        {{ discount.start_date|date:"Y/m/d H:i" }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
-                                </td>
+                        <td>
+                            {% if discount.start_date %}
+                            {{ discount.start_date|date:"Y/m/d H:i" }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
 
-                                <td>
-                                    {% if discount.end_date %}
-                                        {{ discount.end_date|date:"Y/m/d H:i" }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
-                                </td>
+                        <td>
+                            {% if discount.end_date %}
+                            {{ discount.end_date|date:"Y/m/d H:i" }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
 
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{% url 'coupon:coupon_detail' discount.id %}" class="btn btn-outline-info">
-                                            مشاهده
-                                        </a>
-                                        <a href="{% url 'coupon:coupon_edit' discount.id %}" class="btn btn-outline-primary">
-                                            ویرایش
-                                        </a>
-                                        <a href="{% url 'coupon:coupon_delete' discount.id %}" class="btn btn-outline-danger">
-                                            حذف
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="9" class="text-center py-5 text-muted">
-                                    هیچ تخفیفی ثبت نشده است.
-                                </td>
-                            </tr>
-                        {% endfor %}
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a href="{% url 'coupon:coupon_detail' discount.id %}" class="btn btn-outline-info">
+                                    مشاهده
+                                </a>
+                                <a href="{% url 'coupon:coupon_edit' discount.id %}" class="btn btn-outline-primary">
+                                    ویرایش
+                                </a>
+                                <a href="{% url 'coupon:coupon_delete' discount.id %}" class="btn btn-outline-danger">
+                                    حذف
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="9" class="text-center py-5 text-muted">
+                            هیچ تخفیفی ثبت نشده است.
+                        </td>
+                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+            <div>
+            <h4 class="mb-1 fw-bold">لیست کوپن تخفیف‌ها</h4>
+        </div>
+     <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="px-3">#</th>
+                        <th>کد کوپن</th>
+                        <th>نوع تخفیف</th>
+                        <th>دامنه اعمال</th>
+                        <th>مقدار</th>
+                        <th>وضعیت</th>
+                        <th>شروع</th>
+                        <th>پایان</th>
+                        <th class="text-center">عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for discount in discount_coupon %}
+                    <tr>
+                        <td class="px-3">{{ forloop.counter }}-</td>
+                        <td class="fw-semibold">{{ discount.coupon }}</td>
 
+                        <td>
+                            {% if discount.discount_type == 'percent' %}
+                            <span class="badge bg-info text-dark">درصدی</span>
+                            {% else %}
+                            <span class="badge bg-warning text-dark">مبلغی</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if discount.apply_to == 'cart' %}
+                            <span class="badge bg-success">سبد خرید</span>
+                            {% elif discount.apply_to == 'product' %}
+                            <span class="badge bg-primary">محصول خاص</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if discount.discount_type == 'percent' %}
+                            {{ discount.value }}٪
+                            {% else %}
+                            {{ discount.value }} تومان
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if discount.is_active %}
+                            <span class="badge bg-success">فعال</span>
+                            {% else %}
+                            <span class="badge bg-danger">غیرفعال</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if discount.start_date %}
+                            {{ discount.start_date|date:"Y/m/d H:i" }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if discount.end_date %}
+                            {{ discount.end_date|date:"Y/m/d H:i" }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a href="{% url 'coupon:discount_coupon_detail' discount.id %}" class="btn btn-outline-info">
+                                    مشاهده
+                                </a>
+                                <a href="{% url 'coupon:discount_coupon_edit' discount.id %}" class="btn btn-outline-primary">
+                                    ویرایش
+                                </a>
+                                <a href="{% url 'coupon:discount_coupon_delete' discount.id %}" class="btn btn-outline-danger">
+                                    حذف
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="9" class="text-center py-5 text-muted">
+                            هیچ تخفیفی ثبت نشده است.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
