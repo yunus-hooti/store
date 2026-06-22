@@ -103,7 +103,7 @@ def discount_products(list_product):
 
     list_product_discount = []
     for discount in discounts:
-        if discount.apply_to == 'all':
+        if discount.apply_to == 'all' or discount.apply_to == 'cart' :
             for i in list_product:
                 if discount.discount_type == 'percent':
                     i.old_price = i.price
