@@ -40,6 +40,7 @@ class CouponDetail(UserPassesTestMixin, generic.DetailView):
     def test_func(self):
         return self.request.user.is_superuser
 
+
 class DiscountCouponDetail(UserPassesTestMixin, generic.DetailView):
     """
     detail coupon
@@ -51,6 +52,7 @@ class DiscountCouponDetail(UserPassesTestMixin, generic.DetailView):
 
     def test_func(self):
         return self.request.user.is_superuser
+
 
 class CouponCreate(UserPassesTestMixin, generic.CreateView):
     """
@@ -103,7 +105,7 @@ def discount_products(list_product):
 
     list_product_discount = []
     for discount in discounts:
-        if discount.apply_to == 'all' or discount.apply_to == 'cart' :
+        if discount.apply_to == 'all' or discount.apply_to == 'cart':
             for i in list_product:
                 if discount.discount_type == 'percent':
                     i.old_price = i.price
@@ -161,6 +163,7 @@ class DeleteCoupon(UserPassesTestMixin, generic.DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
+
 class DeleteDiscountCoupon(UserPassesTestMixin, generic.DeleteView):
     """
     delete coupon
@@ -171,6 +174,7 @@ class DeleteDiscountCoupon(UserPassesTestMixin, generic.DeleteView):
 
     def test_func(self):
         return self.request.user.is_superuser
+
 
 class EditCoupon(UserPassesTestMixin, generic.UpdateView):
     """
