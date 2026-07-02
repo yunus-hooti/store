@@ -401,9 +401,22 @@
         <p>شماره موبایل: {{ user.phone|default:"ثبت نشده" }}</p> {# فرض بر وجود مدل Profile با فیلد phone_number #}
 
         <div class="user-links">
-            <a href="#user-info">اطلاعات من</a>
-            <a href="#addresses">آدرس‌ها</a>
-            <a href="#cart">سبد خرید</a>
+            <!-- بخش لینک‌های کاربر در سایدبار -->
+            <div class="user-links">
+                <a href="{% url 'account:profile' %}" class="user-link">
+                    <i class="bi bi-person me-2"></i> اطلاعات من
+                </a>
+                <a href="#addresses">آدرس‌ها</a>
+
+                <a href="{% url 'cart:detail_cart' %}" class="user-link">
+                    <i class="bi bi-cart me-2"></i> سبد خرید
+                </a>
+                <!-- لینک جدید برای سفارش‌ها -->
+                <a href="{% url 'order:order_list' %}" class="user-link">
+                    <i class="bi bi-bag-check me-2"></i> سفارش‌های من
+                </a>
+            </div>
+
             {# لینک‌های دیگر در صورت نیاز #}
         </div>
     </div>
@@ -435,6 +448,33 @@
                 </div>
                 <a href="{% url 'cart:detail_cart' %}" class="view-cart-btn">مشاهده سبد خرید</a></div>
         </section>
+
+        <!-- بخش خلاصه سفارش‌ها (کاملاً مشابه ساختار سبد خرید) -->
+        <section class="profile-section" id="orders-summary">
+            <h4 class="section-title">سفارش‌های من</h4>
+
+            <!-- استفاده از همان کلاس cart-summary برای ایجاد همان کادر -->
+            <div class="cart-summary">
+                <div class="cart-info">
+                    <div class="cart-icon">
+                        <i class="bi bi-receipt-cutoff"></i>
+                    </div>
+                    <div class="cart-details">
+                <span class="cart-items-count">
+                    {{ orders_count|default:"0" }} سفارش
+                </span>
+                        <p class="text-muted small mb-0">تاریخچه خرید شما</p>
+                    </div>
+                </div>
+
+                <!-- دکمه اکنون داخل cart-summary است، دقیقاً مثل سبد خرید -->
+                <a href="{% url 'order:order_list' %}"
+                   class="view-cart-btn w-100 text-center d-block text-decoration-none mt-3">
+                    مشاهده تمام سفارش‌ها
+                </a>
+            </div>
+        </section>
+
 
         <!-- بخش آدرس‌ها -->
         <section id="addresses" class="profile-section">

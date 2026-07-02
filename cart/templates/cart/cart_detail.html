@@ -66,7 +66,7 @@
             <span><span id="all-total-price">{{ cart.all_total_price }}</span> تومان</span>
         </div>
         {% if cart.total_price %}
-        <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 20px; font-size: 16px;">تکمیل سفارش</a>
+        <a href="{% url 'order:order_create' %}" class="btn btn-primary" style="width: 100%; margin-top: 20px; font-size: 16px;">تکمیل سفارش</a>
         {% endif %}
     </div>
 </div>

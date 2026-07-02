@@ -41,9 +41,18 @@ class Cart:
     def total_price(self):
         total = []
         for i, j in self.cart.items():
+            total.append(int(j['old_price']) * int(j['quantity']))
+        return sum(total)
+
+    def total_price_next_discount(self):
+        total = []
+        for i, j in self.cart.items():
             product_d = self.product_discount(i)
             total.append(product_d[0].price * j['quantity'])
         return sum(total)
+
+    def discount_amount(self):
+        return self.total_price() - self.total_price_next_discount()
 
     def price_post(self):
         total = 0
@@ -65,7 +74,7 @@ class Cart:
         return total
 
     def all_total_price(self):
-        return self.total_price() + self.price_post()
+        return self.total_price_next_discount() + self.price_post()
 
     def get_item_count(self):
         return len(self.cart)
@@ -88,3 +97,11 @@ class Cart:
     def save(self):
         self.session['cart'] = self.cart
         self.session.modified = True
+
+    def clear(self):
+        if 'cart' in self.session:
+            del self.session['cart']
+        self.cart = {}
+        self.session.modified = True
+
+

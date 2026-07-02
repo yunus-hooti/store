@@ -1,0 +1,160 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+
+{% block title %}جزئیات سفارش #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- هدر صفحه -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="d-flex align-items-center">
+            <a href="{% url 'order:order_list' %}" class="btn btn-light btn-sm rounded-circle me-3">
+                <i class="bi bi-arrow-right">بازگشت به فروشگاه</i>
+            </a>
+            <h3 class="fw-bold mb-0 text-dark">جزئیات سفارش <span class="text-muted fs-5">#{{ order.transaction_id}}</span></h3>
+        </div>
+        <span class="badge {% if order.status == 'ارسال شده' %}bg-success{% else %}bg-primary{% endif %} px-3 py-2 rounded-pill">
+            {{ order.status }}
+        </span>
+    </div>
+
+    <div class="row g-4">
+        <!-- بخش اصلی: جدول محصولات و اطلاعات پرداخت -->
+        <div class="col-lg-8">
+            <!-- کارت لیست محصولات -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-white border-0 pt-4 px-4">
+                    <h5 class="fw-bold mb-0">اقلام سفارش</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4 py-3 border-0">محصول</th>
+                                    <th class="py-3 border-0 text-center">تعداد</th>
+                                    <th class="py-3 border-0 text-center">قیمت واحد</th>
+                                    <th class="pe-4 py-3 border-0 text-end">جمع کل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.items.all %}
+                                <tr>
+                                    <td class="ps-4 py-3">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ item.product.images.first.image.url }}" class="rounded-3 me-3" style="width: 45px; height: 45px; object-fit: cover;">
+                                            <div>
+                                                <div class="fw-bold text-dark small">{{ item.product.name }}</div>
+                                                <div class="text-muted extra-small">{{ item.product.category.name }}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">{{ item.quantity }}</td>
+                                    <td class="text-center text-muted small">{{ item.price|floatformat:0 }}</td>
+                                    <td class="pe-4 text-end fw-bold text-dark">{{ item.get_total_item_price|floatformat:0 }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- کارت اطلاعات پرداخت و ارسال -->
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body p-4">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-truck me-2 text-primary"></i>آدرس ارسال</h6>
+                            <p class="text-muted small mb-0" style="line-height: 1.6;">
+                                {{ order.address_user.first_name|default:"آدرسی ثبت نشده است." }}
+                                {{ order.address_user.last_name }}
+                                {{ order.address_user.province }}
+                                {{ order.address_user.city }}
+                                {{ order.address_user.cod_post }}
+                                {% if order.phone_number %}
+                                <br> <i class="bi bi-telephone me-1"></i> {{ order.phone_number }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body p-4">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-credit-card me-2 text-primary"></i>اطلاعات پرداخت</h6>
+                            <p class="text-muted small mb-0">
+                                روش پرداخت: <span class="text-dark fw-medium">درگاه آنلاین</span><br>
+                                وضعیت: <span class="badge bg-success-subtle text-success rounded-pill">{{order.status}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش کناری: خلاصه فاکتور -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 bg-light sticky-top" style="top: 2rem;">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">خلاصه فاکتور</h5>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted">جمع کل کالاها:</span>
+                        <span class="fw-medium">{{ order.total_amount|floatformat:0 }} تومان</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted">هزینه ارسال:</span>
+                        <span class="text-success fw-medium">{{order.post_price}}</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted">تخفیف:</span>
+                        <span class="text-danger fw-medium">{{discount}}</span>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="h5 fw-bold text-dark">مبلغ نهایی:</span>
+                        <span class="h5 fw-bold text-primary">{{ order.final_amount|floatformat:0 }} <small class="fs-6">تومان</small></span>
+                    </div>
+
+                    <button onclick="window.print()" class="btn btn-outline-dark w-100 rounded-3 border-2">
+                        <i class="bi bi-printer me-2"></i> چاپ فاکتور
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* استایل‌های اختصاصی */
+    .extra-small { font-size: 0.75rem; }
+    
+    .table thead th {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .card { transition: all 0.3s ease; }
+
+    /* استایل برای چاپ (Print) */
+    @media print {
+        .btn, .navbar, .footer, .bi-arrow-right, .btn-outline-dark {
+            display: none !important;
+        }
+        body { background-color: white !important; }
+        .card { border: 1px solid #eee !important; box-shadow: none !important; }
+        .container { width: 100% !important; max-width: 100% !important; }
+    }
+
+    body {
+        direction: rtl;
+        text-align: right;
+    }
+</style>
+{% endblock %}

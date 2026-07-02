@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from .models import User, AddressUser
 from .forms import CreateUserForm, AddressCreatedForm
 from cart.cart import Cart
+from order.views import Order
 
 
 # Create your views here.
@@ -70,8 +71,11 @@ class ProfileView(UserPassesTestMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context['address_user'] = AddressUser.objects.filter(user=self.request.user)
         cart = Cart(self.request)
+        order = Order.objects.filter(user=self.request.user)
+        context['orders_count'] = len(order)
         context["total_price"] = cart.total_price()
         context["cart_item_count"] = cart.get_item_count()
+
         return context
 
 

@@ -1,0 +1,130 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+
+{% block title %}سفارش‌های من{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- هدر صفحه -->
+    <div class="d-flex align-items-center justify-content-between mb-5">
+        <div>
+            <h3 class="fw-bold text-dark mb-1">سفارش‌های من</h3>
+            <p class="text-muted small mb-0">تاریخچه و وضعیت تمامی خرید‌های شما</p>
+        </div>
+        <a href="{% url 'catalog:product_list' %}" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+            <i class="bi bi-arrow-right me-1"></i> بازگشت به فروشگاه
+        </a>
+    </div>
+
+    {% if orders %}
+        <div class="row">
+            <div class="col-12">
+                {% for order in orders %}
+                <!-- کارت هر سفارش -->
+                <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+                    <!-- نوار رنگی کوچک برای نشان دادن وضعیت در بالای کارت -->
+                    <div class="{% if order.status == 'در حال پردازش' %}bg-warning{% elif order.status == 'ارسال شده' %}bg-success{% elif order.status == 'لغو شده' %}bg-danger{% else %}bg-primary{% endif %}" style="height: 4px;"></div>
+                    
+                    <div class="card-body p-4">
+                        <div class="row align-items-center">
+                            <!-- بخش اطلاعات اصلی سفارش -->
+                            <div class="col-md-4 border-end-md">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="text-muted small me-2">شماره سفارش:</span>
+                                    <span class="fw-bold text-dark">#{{ order.transaction_id }}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="text-muted small me-2">تاریخ ثبت:</span>
+                                    <span class="text-dark">{{ order.created|date:"Y/m/d" }}</span>
+                                </div>
+                                <div>
+                                    <span class="badge {% if order.status == 'در حال پردازش' %}bg-warning text-dark{% elif order.status == 'ارسال شده' %}bg-success{% elif order.status == 'لغو شده' %}bg-danger{% else %}bg-primary{% endif %} rounded-pill px-3">
+                                        {{ order.status }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- بخش محصولات (خلاصه) -->
+                            <div class="col-md-5 px-md-4">
+                                <h6 class="small text-muted mb-3">اقلام سفارش:</h6>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="badge bg-light text-dark border me-2">{{ order.items.count }}</span>
+                                    <span class="text-dark small">اقلام خریداری شده</span>
+                                </div>
+                                <!-- نمایش کوچک محصولات (در صورت نیاز به نمایش نام‌ها) -->
+                                <p class="text-muted extra-small mb-0">
+                                    {% for item in order.items.all %}
+                                        {{ item.product.name }}{% if not forloop.last %}، {% endif %}
+                                    {% endfor %}
+                                </p>
+                            </div>
+
+                            <!-- بخش قیمت و دکمه‌های عملیاتی -->
+                            <div class="col-md-3 text-md-end mt-3 mt-md-0">
+                                <div class="mb-3">
+                                    <span class="text-muted small d-block">مبلغ نهایی:</span>
+                                    <span class="h5 fw-bold text-primary">{{ order.final_amount|floatformat:0 }} <small>تومان</small></span>
+                                </div>
+                                
+                                <div class="d-grid gap-2 d-md-block">
+                                    <a href="{% url 'order:order_detail' order.id %}" class="btn btn-light btn-sm rounded-3 border">
+                                        جزئیات سفارش
+                                    </a>
+                                    {% if not order.payment %}
+                                        <a href="" class="btn btn-primary btn-sm rounded-3">
+                                            پرداخت باقی‌مانده
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <!-- حالت زمانی که هیچ سفارشی وجود ندارد -->
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="bi bi-bag-x text-muted" style="font-size: 4rem;"></i>
+            </div>
+            <h4 class="text-dark fw-bold">هنوز سفارشی ثبت نکرده‌اید!</h4>
+            <p class="text-muted mb-4">شروع خرید محصولات مورد علاقه خود از فروشگاه ما.</p>
+            <a href="{% url 'catalog:product_list' %}" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm">
+                مشاهده محصولات
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    /* استایل‌های اختصاصی برای زیبایی بیشتر */
+    .extra-small {
+        font-size: 0.8rem;
+    }
+    
+    .card {
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
+    }
+
+    /* ایجاد مرز در حالت دسکتاپ برای جدا کردن بخش‌ها */
+    @media (min-width: 768px) {
+        .border-end-md {
+            border-right: 1px solid #eee;
+            padding-right: 1.5rem;
+        }
+    }
+
+    /* راست‌چین کردن کلی */
+    body {
+        direction: rtl;
+        text-align: right;
+    }
+</style>
+{% endblock %}
