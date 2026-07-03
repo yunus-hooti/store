@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from random import randint
-
 from account.models import AddressUser
 from catalog.models import Product
 from .models import Order, OrderItem
@@ -17,6 +15,7 @@ class OrderCreateView(LoginRequiredMixin, View):
     """
     Creating the order model after user confirmation and clearing the shopping cart.
     """
+
     def get(self, request):
         cart = Cart(request)
         address_user = AddressUser.objects.filter(user=request.user)
@@ -58,6 +57,9 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "orders"
     template_name = 'order/order_list.html'
 
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user).order_by('-created')
+
 
 class OrderDetailView(LoginRequiredMixin, generic.DetailView):
     model = Order
@@ -69,3 +71,6 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
         order = self.object
         context['discount'] = order.total_amount - order.discount_amount
         return context
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)
