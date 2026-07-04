@@ -59,7 +59,8 @@ class CouponCreate(UserPassesTestMixin, generic.CreateView):
     create coupon
     """
     model = Discount
-    fields = '__all__'
+    fields = ['title', 'apply_to', 'discount_type', 'value', 'is_active', 'start_date', 'end_date', 'product',
+              'category']
     context_object_name = 'discount'
     template_name = 'coupon/coupon_create.html'
     success_url = reverse_lazy('catalog:product_list')
@@ -131,7 +132,7 @@ def discount_products(list_product):
                         if discount_amount > 0:
                             i.old_price = i.price
                             i.price = discount_amount
-                if i not in list_product:
+                if i not in list_product_discount:
                     list_product_discount.append(i)
 
         elif discount.apply_to == 'category':

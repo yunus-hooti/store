@@ -276,7 +276,7 @@
         </div>
 
         <div class="actions">
-            <form method="post" action="#" style="flex:1; margin:0;">
+            <form method="post" action="{% url 'cart:add_cart' product.id %}" style="flex:1; margin:0;">
                 {% csrf_token %}
                 <input type="hidden" name="product_id" value="{{ product.id }}">
                 <input type="hidden" name="quantity" value="1">

@@ -36,7 +36,7 @@ class Discount(models.Model):
         new = timezone.now()
         if self.start_date and self.start_date > new:
             return False
-        if self.end_date and self.end_date > new:
+        if self.end_date and self.end_date < new:
             return False
         return self.is_active
 
