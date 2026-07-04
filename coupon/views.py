@@ -147,7 +147,7 @@ def discount_products(list_product):
                         if discount_amount > 0:
                             i.old_price = i.price
                             i.price = discount_amount
-                    list_product_discount.append(i)
+                list_product_discount.append(i)
     if list_product_discount:
         return list_product_discount
     return list_product
