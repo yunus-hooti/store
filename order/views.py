@@ -32,7 +32,7 @@ class OrderCreateView(LoginRequiredMixin, View):
             address_user=address,
             total_amount=cart.total_price(),
             discount_amount=cart.total_price_next_discount(),
-            final_amount=cart.total_price_next_discount(),
+            final_amount=cart.all_total_price(),
             post_price=cart.price_post()
 
         )

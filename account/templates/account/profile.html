@@ -529,6 +529,8 @@
             {% if user.is_superuser %}
             <a href="{% url 'coupon:coupon_list' %}" class="add-address-btn"><i class="fas fa-plus-circle"></i>
                 تخفیف ها</a>
+            <a href="{% url 'catalog:create_product' %}" class="add-address-btn"><i class="fas fa-plus-circle"></i>
+                افزودن کالای جدید</a>
             {% endif %}
         </section>
 

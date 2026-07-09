@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'coupon.apps.CouponConfig',
     'order.apps.OrderConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,5 +145,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 
+MERCHANT = "4ec277ab-66f7-4892-b18b-c7b62603408a"
 
+SANDBOX = True
 
