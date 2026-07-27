@@ -1,6 +1,9 @@
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+import logging
 
 from account.models import AddressUser
 from catalog.models import Product
@@ -17,40 +20,50 @@ class OrderCreateView(LoginRequiredMixin, View):
     """
 
     def get(self, request):
-        cart = Cart(request)
-        address_user = AddressUser.objects.filter(user=request.user)
-        return render(request, 'order/checkout.html',
-                      {'cart': cart, 'address_user': address_user, 'quantity': len(cart.cart)})
+        try:
+            cart = Cart(request)
+            address_user = AddressUser.objects.filter(user=request.user)
+            return render(request, 'order/checkout.html',
+                          {'cart': cart, 'address_user': address_user, 'quantity': len(cart.cart)})
+        except AddressUser.DoesNotExist:
+            logging.error("مشکل در ارسال  اطلاعت",exc_info=True)
+            raise Exception("مشکل در ارسال  اطلاعت")
 
     def post(self, request):
         cart = Cart(request)
         address_id = request.POST.get('address_id')
-        print(request.POST)
         address = get_object_or_404(AddressUser, id=address_id)
-        order = Order.objects.create(
-            user=request.user,
-            address_user=address,
-            total_amount=cart.total_price(),
-            discount_amount=cart.total_price_next_discount(),
-            final_amount=cart.all_total_price(),
-            post_price=cart.price_post()
+        try:
+            order = Order.objects.create(
+                user=request.user,
+                address_user=address,
+                total_amount=cart.total_price(),
+                discount_amount=cart.total_price_next_discount(),
+                final_amount=cart.all_total_price(),
+                post_price=cart.price_post()
 
-        )
-        order.save()
-        for p_id, item in cart.cart.items():
-            product = get_object_or_404(Product, id=p_id)
-            item_order = OrderItem.objects.create(
-                order=order,
-                product=product,
-                quantity=item['quantity'],
-                price_at_purchase=item['price'],
             )
+            order.save()
+        except Exception as e:
+            logging.error(f"مشکل در ذخیره سفارش {e} ",exc_info=True)
+            raise Exception("مشکل در ذخیره سفارش")
+        try:
+            for p_id, item in cart.cart.items():
+                product = get_object_or_404(Product, id=p_id)
+                item_order = OrderItem.objects.create(
+                    order=order,
+                    product=product,
+                    quantity=item['quantity'],
+                    price_at_purchase=item['price'],
+                )
 
-            item_order.save()
+                item_order.save()
 
-        cart.clear()
-        return redirect('catalog:product_list')
-
+            cart.clear()
+            return redirect('catalog:product_list')
+        except Exception as e:
+            logging.error(f"مشکل در ثبت آیتم سفارش ها {e} ",exc_info=True)
+            raise Exception("مشکل در ثبت آیتم سفارش ها")
 
 class OrderListView(LoginRequiredMixin, generic.ListView):
     model = Order

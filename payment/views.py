@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 from django.shortcuts import redirect
@@ -86,8 +88,12 @@ def verify(authority):
 
 
 def reducing_inventory(request):
-    cart = Cart(request)
-    for i in cart:
-        product = get_object_or_404(Product, id=i['product'].id)
-        product.inventory -= i['quantity']
-        product.save()
+    try:
+        cart = Cart(request)
+        for i in cart:
+            product = get_object_or_404(Product, id=i['product'].id)
+            product.inventory -= i['quantity']
+            product.save()
+    except Exception as e:
+        logging.error(f"مشکل در کم کردن مقدار کالا بعد از خرید  {e}", exc_info=True)
+        raise Exception("شکل در کم کردن مقدار کالا بعد از خرید ")

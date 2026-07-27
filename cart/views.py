@@ -4,9 +4,12 @@ from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 
+import logging
+
 from .cart import Cart
 from catalog.models import Product
 from coupon.views import discount_products
+
 
 # Create your views here.
 
@@ -14,12 +17,16 @@ class AddCart(View):
     """
     Add a cart to the cart.
     """
+
     def post(self, request, id):
-        product = get_object_or_404(Product, id=id)
-        print(product)
-        cart = Cart(request)
-        cart.add(product)
-        return redirect("cart:detail_cart")
+        try:
+            product = get_object_or_404(Product, id=id)
+            cart = Cart(request)
+            cart.add(product)
+            return redirect("cart:detail_cart")
+        except Cart.DoesNotExist:
+            logging.error("مشکل در افزودن به سبد خرید", exc_info=True)
+            raise Exception("مشکل در افزودن به سبد خرید")
 
 
 class CartDetailView(TemplateView):
@@ -38,13 +45,12 @@ class CartDetailView(TemplateView):
         return context
 
 
-
-
 class CartUpdateView(View):
     """
     Update a cart.
     """
-    def post(self, request, *args, **kwargs):  # استفاده از *args, **kwargs برای انعطاف‌پذیری بیشتر
+
+    def post(self, request, *args, **kwargs):
         product_id = request.POST.get('product_id')
         action = request.POST.get('action')
         product = get_object_or_404(Product, pk=product_id)
@@ -53,7 +59,7 @@ class CartUpdateView(View):
             return JsonResponse({'success': False, 'error': 'Missing product_id or action'}, status=400)
 
         try:
-            cart = Cart(request)  # اطمینان حاصل کنید که Cart درست مقداردهی می‌شود (مثلاً با session)
+            cart = Cart(request)
 
             if action == 'add':
                 cart.add(product)
@@ -64,7 +70,6 @@ class CartUpdateView(View):
             else:
                 return JsonResponse({'success': False, 'error': 'Invalid action'}, status=400)
 
-            # اطمینان حاصل کنید که این متدها وجود دارند و مقادیر صحیح برمی‌گردانند
             updated_quantity = cart.cart.get(str(product_id), {}).get('quantity', 0)
             product_ids = cart.cart.keys()
             products = Product.objects.filter(id__in=product_ids)
@@ -79,16 +84,16 @@ class CartUpdateView(View):
                 'success': True,
                 'quantity': updated_quantity,
                 'price_post': cart.price_post(),
-                'total_':total_,
-                'total_price': cart.total_price(),  # فرض می‌کنیم این متد در کلاس Cart وجود دارد
+                'total_': total_,
+                'total_price': cart.total_price(),
                 'cart_count': len(cart.cart),
-                'all_total_price':cart.all_total_price(),
-                'action': action  # برای دیباگ مفید است
+                'all_total_price': cart.all_total_price(),
+                'action': action
             })
 
         except Product.DoesNotExist:
+            logging.error("کالا پیدا نشد", exc_info=True)
             return JsonResponse({'success': False, 'error': 'Product not found'}, status=404)
         except Exception as e:
-            # لاگ کردن خطا برای دیباگ
-            print(f"Error updating cart: {e}")
+            logging.error(f" مشکل در آپدیت سبد خرید  {e} ", exc_info=True)
             return JsonResponse({'success': False, 'error': 'An internal error occurred'}, status=500)

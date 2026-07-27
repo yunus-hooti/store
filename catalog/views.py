@@ -25,9 +25,9 @@ class ProductListView(generic.ListView):
             context = super().get_context_data(**kwargs)
             context['products'] = discount_products(Product.objects.all())
             return context
-        except:
-            logger.error('مشکل در نمایش محصولات تخفیف خورده', exc_info=True)
-            raise Http404
+        except Exception as e:
+            logger.error(f'مشکل در نمایش محصولات تخفیف خورده {e} ', exc_info=True)
+            raise Exception("مشکل در نمایش محصولات تخفیف خورده")
 
 
 class ProductDetailView(generic.DetailView):
@@ -45,9 +45,9 @@ class ProductDetailView(generic.DetailView):
             product = Product.objects.get(pk=pk)
             context['product'] = discount_products([product])[0]
             return context
-        except:
-            logger.error("مشکل در نمایش مقدار تخفیف محصول ", exc_info=True)
-            raise Http404
+        except Exception as e:
+            logger.error(f"مشکل در نمایش مقدار تخفیف محصول {e} ", exc_info=True)
+            raise Exception("مشکل در نمایش مقدار تخفیف محصول")
 
 
 class CreateProductView(generic.TemplateView):
@@ -62,9 +62,9 @@ class CreateProductView(generic.TemplateView):
             context = super().get_context_data(**kwargs)
             context["category"] = Category.objects.all()
             return context
-        except:
-            logger.error("مشکل در دریافت دسته بندی ها ", exc_info=True)
-            raise Http404
+        except Exception as e :
+            logger.error(f"مشکل در دریافت دسته بندی ها {e} ", exc_info=True)
+            raise Exception("مشکل در دریافت دسته بندی ها")
 
     def post(self, request, *args, **kwargs):
         """
@@ -78,8 +78,8 @@ class CreateProductView(generic.TemplateView):
             inventory_product = self.request.POST.get('inventory')
             weight_product = self.request.POST.get('weight')
         except Exception as e:
-            logger.error("مشکل در دریافت اطلاعات از سمت کاربر", exc_info=True)
-            raise Http404
+            logger.error(f"مشکل در دریافت اطلاعات از سمت کاربر {e} ", exc_info=True)
+            raise Exception("مشکل در دریافت اطلاعات از سمت کاربر")
         try:
             product_create = Product.objects.create(category=category_product, name=name_product,
                                                     description=description_product,
@@ -87,8 +87,8 @@ class CreateProductView(generic.TemplateView):
                                                     weight=weight_product)
             product_create.save()
         except Exception as e:
-            logger.error("مشکل در ساخت مخصول", exc_info=True)
-            raise ValueError(e)
+            logger.error(f"مشکل در ساخت مخصول {e} ", exc_info=True)
+            raise Exception("شکل در ساخت مخصول")
 
         try:
             attr_name = self.request.POST.getlist('attr_name[]')
@@ -98,14 +98,14 @@ class CreateProductView(generic.TemplateView):
                     feature = Feature.objects.create(product=product_create, name=attr_name, value=attr_value)
                     feature.save()
         except Exception as e:
-            logger.error("مشکل در ثبت ویژگی های مخصول", exc_info=True)
-            raise Http404
+            logger.error(f"مشکل در ثبت ویژگی های مخصول {e} ", exc_info=True)
+            raise Exception("مشکل در ثبت ویژگی های مخصول")
         try:
             image_product = self.request.FILES.get("image")
             image = Images.objects.create(product=product_create, image=image_product)
             image.save()
         except Exception as e:
-            logger.error("مشکل در ذخیره عکس محصول")
-            raise Http404
+            logger.error(f"مشکل در ذخیره عکس محصول {e} ",exc_info=True)
+            raise Exception("مشکل در ذخیره عکس محصول")
 
         return redirect('catalog:product_list')

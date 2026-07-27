@@ -1,8 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.http import Http404
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.utils import timezone
+
+import logging
 
 from .models import Discount, DiscountCoupon
 
@@ -23,9 +27,13 @@ class CouponList(UserPassesTestMixin, generic.ListView):
         return self.request.user.is_superuser
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['discount_coupon'] = DiscountCoupon.objects.all()
-        return context
+        try:
+            context = super().get_context_data(**kwargs)
+            context['discount_coupon'] = DiscountCoupon.objects.all()
+            return context
+        except Exception as e:
+            logging.error(f"مشکل در دریافت تخفیف ها {e} ", exc_info=True)
+            raise Exception("")
 
 
 class CouponDetail(UserPassesTestMixin, generic.DetailView):
@@ -78,7 +86,9 @@ class CouponCreate(UserPassesTestMixin, generic.CreateView):
         elif apply_to == 'product':
             if Discount.objects.filter(apply_to='product', product=cd['product']).exists():
                 messages.success(self.request, 'رای این محصول قبلاً تخغیف ثبت شده')
-
+        else:
+            logging.info("چنین دسته ای وحود ندارد")
+            return redirect("coupon:coupon_create")
         messages.success(self.request, 'تخفیف با موفقیت ثبت شد ')
         return super().form_valid(form)
 

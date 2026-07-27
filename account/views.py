@@ -1,9 +1,12 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.contrib.auth import logout, login
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
+
+import logging
 
 from .models import User, AddressUser
 from .forms import CreateUserForm, AddressCreatedForm
@@ -14,13 +17,17 @@ from order.views import Order
 # Create your views here.
 
 def log_out(request):
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            logout(request)
-            return redirect('account:login')
-        return render(request, 'account/logout.html')
-    messages.success(request, "شما وارد نشدید")
-    return redirect("account:login")
+    try:
+        if request.user.is_authenticated:
+            if request.method == "POST":
+                logout(request)
+                return redirect('account:login')
+            return render(request, 'account/logout.html')
+        messages.success(request, "شما وارد نشدید")
+        return redirect("account:login")
+    except:
+        logging.error('مشکل در ورود به سایت', exc_info=True)
+        raise Exception("مشکل در ورود به سایت'")
 
 
 class RegisterView(UserPassesTestMixin, generic.FormView):
@@ -37,22 +44,26 @@ class RegisterView(UserPassesTestMixin, generic.FormView):
             return not self.request.user.is_authenticated
 
     def form_invalid(self, form):
-        messages.error(self.request,f"{form.errors}")
+        messages.error(self.request, f"{form.errors}")
         return super().form_invalid(form)
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            user = User.manager.create(
-                phone=form.cleaned_data["phone"],
-                first_name=form.cleaned_data['first_name'],
-                last_name=form.cleaned_data['last_name'], )
-            user.set_password(form.cleaned_data['password_confirm'])
-            user.save()
-            login(self.request, user)
-            return redirect("catalog:product_list")
+        try:
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                user = User.manager.create(
+                    phone=form.cleaned_data["phone"],
+                    first_name=form.cleaned_data['first_name'],
+                    last_name=form.cleaned_data['last_name'], )
+                user.set_password(form.cleaned_data['password_confirm'])
+                user.save()
+                login(self.request, user)
+                return redirect("catalog:product_list")
 
-        return self.form_invalid(form)
+            return self.form_invalid(form)
+        except Exception as e:
+            logging.error(f"مشکل در ثبت نام کاربر {e} ", exc_info=True)
+            raise Exception("مشکل در ثبت نام کاربر")
 
 
 class ProfileView(UserPassesTestMixin, generic.TemplateView):
@@ -68,15 +79,19 @@ class ProfileView(UserPassesTestMixin, generic.TemplateView):
         return redirect("account:login")
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['address_user'] = AddressUser.objects.filter(user=self.request.user)
-        cart = Cart(self.request)
-        order = Order.objects.filter(user=self.request.user)
-        context['orders_count'] = len(order)
-        context["total_price"] = cart.total_price()
-        context["cart_item_count"] = cart.get_item_count()
+        try:
+            context = super().get_context_data(**kwargs)
+            context['address_user'] = AddressUser.objects.filter(user=self.request.user)
+            cart = Cart(self.request)
+            order = Order.objects.filter(user=self.request.user)
+            context['orders_count'] = len(order)
+            context["total_price"] = cart.total_price()
+            context["cart_item_count"] = cart.get_item_count()
 
-        return context
+            return context
+        except Exception as e:
+            logging.error(f"مشکل در دریافت اطلاعات اطلاعت کاربر {e} ", exc_info=True)
+            raise Exception("مشکل در دریافت اطلاعات اطلاعت کاربر ")
 
 
 class AddressCreatedView(UserPassesTestMixin, generic.FormView):
@@ -87,13 +102,18 @@ class AddressCreatedView(UserPassesTestMixin, generic.FormView):
         form = self.form_class(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = AddressUser.objects.create(user=request.user, phone_number=cd['phone_number'],
-                                              first_name=cd['first_name'], last_name=cd['last_name'],
-                                              province=cd['province'], city=cd['city'],
-                                              cod_post=cd['cod_post'])
-            user.save()
-            messages.success(request, "آدرس حدید ثبت شد", extra_tags='ok_address')
-            return redirect("account:profile")
+            try:
+                user = AddressUser.objects.create(user=request.user, phone_number=cd['phone_number'],
+                                                  first_name=cd['first_name'], last_name=cd['last_name'],
+                                                  province=cd['province'], city=cd['city'],
+                                                  cod_post=cd['cod_post'])
+                user.save()
+                messages.success(request, "آدرس حدید ثبت شد", extra_tags='ok_address')
+                return redirect("account:profile")
+            except Exception as e:
+                logging.error(f"مشکل در ثبت آدرس {e}", exc_info=True)
+                raise Exception("مشکل در ثبت آدرس {")
+
         messages.success(request, 'مشکل در آدرس ارسالی')
         return redirect("account:address_create")
 
