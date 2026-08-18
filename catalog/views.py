@@ -1,7 +1,9 @@
-from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import generic
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import UserPassesTestMixin
 
+from coupon.forms import CategoryForm
 from .models import Product, Category, Feature, Images
 from coupon.views import discount_products
 import logging
@@ -10,6 +12,17 @@ logger = logging.getLogger('catalog')
 
 
 # Create your views here.
+
+class CategoryListView(generic.ListView):
+    """
+    List all categories
+    """
+
+    model = Category
+    paginate_by = 20
+    template_name = 'catalog/category_list.html'
+    context_object_name = 'categories'
+
 
 class ProductListView(generic.ListView):
     """
@@ -21,13 +34,32 @@ class ProductListView(generic.ListView):
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
+        product = None
+        try:
+            category = Category.objects.get(slug=self.kwargs['slug'])
+            product = Product.objects.filter(category=category)
+        except:
+            product = Product.objects.all()
         try:
             context = super().get_context_data(**kwargs)
-            context['products'] = discount_products(Product.objects.all())
+            context['products'] = discount_products(product)
             return context
         except Exception as e:
             logger.error(f'مشکل در نمایش محصولات تخفیف خورده {e} ', exc_info=True)
             raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+
+
+class CreateCategoryView(UserPassesTestMixin, generic.CreateView):
+    """
+    Creating a category
+    """
+    model = Category
+    template_name = 'catalog/create_category.html'
+    form_class = CategoryForm
+    success_url = reverse_lazy('catalog:category_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class ProductDetailView(generic.DetailView):
@@ -50,19 +82,22 @@ class ProductDetailView(generic.DetailView):
             raise Exception("مشکل در نمایش مقدار تخفیف محصول")
 
 
-class CreateProductView(generic.TemplateView):
+class CreateProductView(UserPassesTestMixin, generic.TemplateView):
     """
     create a new product
     """
     fields = ['name', 'description', 'price', 'inventory', 'weight']
     template_name = 'catalog/create_product.html'
 
+    def test_func(self):
+        return self.request.user.is_superuser
+
     def get_context_data(self, **kwargs):
         try:
             context = super().get_context_data(**kwargs)
             context["category"] = Category.objects.all()
             return context
-        except Exception as e :
+        except Exception as e:
             logger.error(f"مشکل در دریافت دسته بندی ها {e} ", exc_info=True)
             raise Exception("مشکل در دریافت دسته بندی ها")
 
@@ -105,7 +140,7 @@ class CreateProductView(generic.TemplateView):
             image = Images.objects.create(product=product_create, image=image_product)
             image.save()
         except Exception as e:
-            logger.error(f"مشکل در ذخیره عکس محصول {e} ",exc_info=True)
+            logger.error(f"مشکل در ذخیره عکس محصول {e} ", exc_info=True)
             raise Exception("مشکل در ذخیره عکس محصول")
 
         return redirect('catalog:product_list')

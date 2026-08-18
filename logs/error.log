@@ -1,0 +1,1940 @@
+[2026-08-16 19:42:40] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/category/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_products' not found. 'category_products' is not a valid view function or pattern name.
+[2026-08-16 19:42:40] ERROR  [django.server:213] ERROR: "GET /catalog/category/ HTTP/1.1" 500 184707
+[2026-08-16 19:46:34] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/category/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_add' not found. 'category_add' is not a valid view function or pattern name.
+[2026-08-16 19:46:34] ERROR  [django.server:213] ERROR: "GET /catalog/category/ HTTP/1.1" 500 172617
+[2026-08-16 20:25:49] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/korakaq
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 43, in get_queryset
+    category = Category.objects.get(slug=kwargs['slug'])
+                                         ~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 158, in get
+    self.object_list = self.get_queryset()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 46, in get_queryset
+    raise Exception("مشکل در ایست مخصولات دسته بندی ")
+Exception: مشکل در ایست مخصولات دسته بندی 
+[2026-08-16 20:25:49] ERROR  [django.server:213] ERROR: "GET /catalog/korakaq HTTP/1.1" 500 92102
+[2026-08-16 20:26:35] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/korakaq
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 43, in get_queryset
+    category = Category.objects.get(slug=self.kwargs['slug'])
+                                         ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 158, in get
+    self.object_list = self.get_queryset()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 46, in get_queryset
+    raise Exception("مشکل در ایست مخصولات دسته بندی ")
+Exception: مشکل در ایست مخصولات دسته بندی 
+[2026-08-16 20:26:35] ERROR  [django.server:213] ERROR: "GET /catalog/korakaq HTTP/1.1" 500 92133
+[2026-08-16 20:26:57] ERROR  [catalog:38] ERROR: مشکل در نمایش محصولات تخفیف خورده object of type 'NoneType' has no len() 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+[2026-08-16 20:26:57] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/korakaq
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 39, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:26:57] ERROR  [catalog:38] ERROR: مشکل در نمایش محصولات تخفیف خورده object of type 'NoneType' has no len() 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+[2026-08-16 20:26:57] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/korakaq
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 39, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:26:57] ERROR  [django.server:213] ERROR: "GET /catalog/korakaq HTTP/1.1" 500 127641
+[2026-08-16 20:28:44] ERROR  [catalog:39] ERROR: مشکل در نمایش محصولات تخفیف خورده object of type 'NoneType' has no len() 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+[2026-08-16 20:28:44] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/korakaq
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 40, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:28:44] ERROR  [django.server:213] ERROR: "GET /catalog/korakaq HTTP/1.1" 500 127780
+[2026-08-16 20:29:05] ERROR  [catalog:39] ERROR: مشکل در نمایش محصولات تخفیف خورده object of type 'NoneType' has no len() 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+[2026-08-16 20:29:05] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/korakaq
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 40, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:29:05] ERROR  [django.server:213] ERROR: "GET /catalog/korakaq HTTP/1.1" 500 127643
+[2026-08-16 20:30:22] ERROR  [catalog:39] ERROR: مشکل در نمایش محصولات تخفیف خورده object of type 'NoneType' has no len() 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+[2026-08-16 20:30:22] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/korakaq
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 40, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:30:22] ERROR  [django.server:213] ERROR: "GET /catalog/korakaq HTTP/1.1" 500 127798
+[2026-08-16 20:30:26] ERROR  [catalog:39] ERROR: مشکل در نمایش محصولات تخفیف خورده object of type 'NoneType' has no len() 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+[2026-08-16 20:30:26] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/korakaq
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 40, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:30:26] ERROR  [django.server:213] ERROR: "GET /catalog/korakaq HTTP/1.1" 500 127661
+[2026-08-16 20:31:08] ERROR  [catalog:39] ERROR: مشکل در نمایش محصولات تخفیف خورده object of type 'NoneType' has no len() 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+[2026-08-16 20:31:08] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/sastam
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/paginator.py", line 111, in count
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 40, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:31:08] ERROR  [django.server:213] ERROR: "GET /catalog/sastam HTTP/1.1" 500 127645
+[2026-08-16 20:33:17] ERROR  [catalog:39] ERROR: مشکل در نمایش محصولات تخفیف خورده 'slug' 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 33, in get_context_data
+    category = Category.objects.get(slug=self.kwargs['slug'])
+                                         ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+[2026-08-16 20:33:17] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 33, in get_context_data
+    category = Category.objects.get(slug=self.kwargs['slug'])
+                                         ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 40, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:33:17] ERROR  [django.server:213] ERROR: "GET /catalog/ HTTP/1.1" 500 92859
+[2026-08-16 20:34:34] ERROR  [catalog:41] ERROR: مشکل در نمایش محصولات تخفیف خورده 'slug' 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    if self.kwargs['slug']:
+       ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+[2026-08-16 20:34:34] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    if self.kwargs['slug']:
+       ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 42, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:34:34] ERROR  [django.server:213] ERROR: "GET /catalog/ HTTP/1.1" 500 92731
+[2026-08-16 20:34:49] ERROR  [catalog:41] ERROR: مشکل در نمایش محصولات تخفیف خورده 'slug' 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    if self.kwargs['slug']:
+       ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+[2026-08-16 20:34:49] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    if self.kwargs['slug']:
+       ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 42, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:34:49] ERROR  [django.server:213] ERROR: "GET /catalog/ HTTP/1.1" 500 92732
+[2026-08-16 20:35:18] ERROR  [catalog:41] ERROR: مشکل در نمایش محصولات تخفیف خورده 'slug' 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    if self.kwargs['slug'] is not None:
+       ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+[2026-08-16 20:35:18] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    if self.kwargs['slug'] is not None:
+       ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 42, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:35:18] ERROR  [django.server:213] ERROR: "GET /catalog/ HTTP/1.1" 500 92893
+[2026-08-16 20:35:19] ERROR  [catalog:41] ERROR: مشکل در نمایش محصولات تخفیف خورده 'slug' 
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    if self.kwargs['slug'] is not None:
+       ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+[2026-08-16 20:35:19] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 34, in get_context_data
+    if self.kwargs['slug'] is not None:
+       ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 42, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:35:19] ERROR  [django.server:213] ERROR: "GET /catalog/ HTTP/1.1" 500 92893
+[2026-08-16 20:37:03] ERROR  [catalog:43] ERROR: مشکل در نمایش محصولات تخفیف خورده  
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    category = Category.objects.get(slug=self.kwargs['slug'])
+                                         ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 38, in get_context_data
+    raise Http404
+django.http.response.Http404
+[2026-08-16 20:37:03] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    category = Category.objects.get(slug=self.kwargs['slug'])
+                                         ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 38, in get_context_data
+    raise Http404
+django.http.response.Http404
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 44, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:37:03] ERROR  [django.server:213] ERROR: "GET /catalog/ HTTP/1.1" 500 97349
+[2026-08-16 20:37:15] ERROR  [catalog:43] ERROR: مشکل در نمایش محصولات تخفیف خورده  
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    category = Category.objects.get(slug=self.kwargs['slug'])
+                                         ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 38, in get_context_data
+    raise Http404
+django.http.response.Http404
+[2026-08-16 20:37:15] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 35, in get_context_data
+    category = Category.objects.get(slug=self.kwargs['slug'])
+                                         ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 38, in get_context_data
+    raise Http404
+django.http.response.Http404
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 44, in get_context_data
+    raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+Exception: مشکل در نمایش محصولات تخفیف خورده
+[2026-08-16 20:37:15] ERROR  [django.server:213] ERROR: "GET /catalog/ HTTP/1.1" 500 97212
+[2026-08-17 17:58:31] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/category/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'create_category' with no arguments not found. 1 pattern(s) tried: ['catalog/create_category/(?P<pk>[0-9]+)/\\Z']
+[2026-08-17 17:58:31] ERROR  [django.server:213] ERROR: "GET /catalog/category/ HTTP/1.1" 500 176375
+[2026-08-17 18:08:58] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_add' not found. 'category_add' is not a valid view function or pattern name.
+[2026-08-17 18:08:58] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 169519
+[2026-08-17 18:09:24] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_add' not found. 'category_add' is not a valid view function or pattern name.
+[2026-08-17 18:09:24] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 169519
+[2026-08-17 18:12:32] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/category/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'product_detail' with arguments '('korakaq',)' not found. 1 pattern(s) tried: ['catalog/Product_detail/(?P<pk>[0-9]+)/\\Z']
+[2026-08-17 18:12:32] ERROR  [django.server:213] ERROR: "GET /catalog/category/ HTTP/1.1" 500 189883
+[2026-08-17 18:13:46] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/category/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category' with arguments '('korakaq',)' not found. 1 pattern(s) tried: ['catalog/category/\\Z']
+[2026-08-17 18:13:46] ERROR  [django.server:213] ERROR: "GET /catalog/category/ HTTP/1.1" 500 188426
+[2026-08-17 18:13:46] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/category/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category' with arguments '('korakaq',)' not found. 1 pattern(s) tried: ['catalog/category/\\Z']
+[2026-08-17 18:13:46] ERROR  [django.server:213] ERROR: "GET /catalog/category/ HTTP/1.1" 500 188426
+[2026-08-17 18:15:49] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/category/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category' not found. 'category' is not a valid view function or pattern name.
+[2026-08-17 18:15:49] ERROR  [django.server:213] ERROR: "GET /catalog/category/ HTTP/1.1" 500 145649
+[2026-08-17 18:16:23] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/category/
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_list' with arguments '('korakaq',)' not found. 1 pattern(s) tried: ['catalog/category/\\Z']
+[2026-08-17 18:16:23] ERROR  [django.server:213] ERROR: "GET /catalog/category/ HTTP/1.1" 500 188516
+[2026-08-17 18:19:56] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_list' not found. 'category_list' is not a valid view function or pattern name.
+[2026-08-17 18:19:56] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 159125
+[2026-08-17 18:20:37] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 123, in get_success_url
+    url = self.object.get_absolute_url()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Category' object has no attribute 'get_absolute_url'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 151, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 134, in form_valid
+    return super().form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 63, in form_valid
+    return HttpResponseRedirect(self.get_success_url())
+                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 125, in get_success_url
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: No URL to redirect to.  Either provide a url or define a get_absolute_url method on the Model.
+[2026-08-17 18:20:37] ERROR  [django.server:213] ERROR: "POST /catalog/create_category HTTP/1.1" 500 106223
+[2026-08-17 18:47:06] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 151, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/catalog/views.py", line 57, in form_valid
+    category = Category.objects.get(name=self.kwargs['name'])
+                                         ~~~~~~~~~~~^^^^^^^^
+KeyError: 'name'
+[2026-08-17 18:47:06] ERROR  [django.server:213] ERROR: "POST /catalog/create_category HTTP/1.1" 500 93374
+[2026-08-17 19:09:05] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
+    return super().get(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 72, in get_context_data
+    kwargs["form"] = self.get_form()
+                     ^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 36, in get_form
+    form_class = self.get_form_class()
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 84, in get_form_class
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Specifying both 'fields' and 'form_class' is not permitted.
+[2026-08-17 19:09:05] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 100632
+[2026-08-17 19:09:21] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
+    return super().get(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 72, in get_context_data
+    kwargs["form"] = self.get_form()
+                     ^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 36, in get_form
+    form_class = self.get_form_class()
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 84, in get_form_class
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Specifying both 'fields' and 'form_class' is not permitted.
+[2026-08-17 19:09:21] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 100769
+[2026-08-17 19:09:24] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
+    return super().get(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 72, in get_context_data
+    kwargs["form"] = self.get_form()
+                     ^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 37, in get_form
+    return form_class(**self.get_form_kwargs())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/forms/models.py", line 362, in __init__
+    raise ValueError("ModelForm has no model class specified.")
+ValueError: ModelForm has no model class specified.
+[2026-08-17 19:09:24] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 102996
+[2026-08-17 19:10:17] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
+    return super().get(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 72, in get_context_data
+    kwargs["form"] = self.get_form()
+                     ^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 37, in get_form
+    return form_class(**self.get_form_kwargs())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/forms/models.py", line 362, in __init__
+    raise ValueError("ModelForm has no model class specified.")
+ValueError: ModelForm has no model class specified.
+[2026-08-17 19:10:17] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 102996
+[2026-08-17 19:10:20] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
+    return super().get(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 72, in get_context_data
+    kwargs["form"] = self.get_form()
+                     ^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 37, in get_form
+    return form_class(**self.get_form_kwargs())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BaseForm.__init__() got an unexpected keyword argument 'instance'
+[2026-08-17 19:10:20] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 97074
+[2026-08-17 19:10:21] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 178, in get
+    return super().get(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 72, in get_context_data
+    kwargs["form"] = self.get_form()
+                     ^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 37, in get_form
+    return form_class(**self.get_form_kwargs())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BaseForm.__init__() got an unexpected keyword argument 'instance'
+[2026-08-17 19:10:21] ERROR  [django.server:213] ERROR: "GET /catalog/create_category HTTP/1.1" 500 97074
+[2026-08-17 19:46:17] ERROR  [django.request:253] ERROR: Internal Server Error: /catalog/create_category
+Traceback (most recent call last):
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 182, in post
+    return super().post(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 149, in post
+    form = self.get_form()
+           ^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/.venv/lib/python3.12/site-packages/django/views/generic/edit.py", line 37, in get_form
+    return form_class(**self.get_form_kwargs())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yons-hooti/Desktop/project/store/coupon/forms.py", line 14, in __init__
+    self.fields['slug'].required = False
+    ~~~~~~~~~~~^^^^^^^^
+KeyError: 'slug'
+[2026-08-17 19:46:17] ERROR  [django.server:213] ERROR: "POST /catalog/create_category HTTP/1.1" 500 97486
