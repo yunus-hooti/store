@@ -14,7 +14,7 @@ class Category(models.Model):
     Classification of products.
     """
     name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True,null=True,blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

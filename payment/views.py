@@ -4,7 +4,8 @@ from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 from django.shortcuts import redirect
 from django.http import HttpResponse
-
+from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 import requests
 import json
 
@@ -12,6 +13,7 @@ from django.urls import reverse
 
 from cart.cart import Cart
 from catalog.models import Product
+from .models import Payment
 
 # ? sandbox merchant
 if settings.SANDBOX:
@@ -51,6 +53,8 @@ def send_request(request):
             authority = response_json['Authority']
             if response_json['Status'] == 100:
                 reducing_inventory(request)
+                Product.objects.create(user=request.user, amount=cart.total_price_next_discount(),
+                                       description=description, phone=request.user.phone)
                 cart.clear()
                 return redirect(ZP_API_STARTPAY + authority)
             else:
@@ -97,3 +101,9 @@ def reducing_inventory(request):
     except Exception as e:
         logging.error(f"مشکل در کم کردن مقدار کالا بعد از خرید  {e}", exc_info=True)
         raise Exception("شکل در کم کردن مقدار کالا بعد از خرید ")
+
+
+class PaymentListView(LoginRequiredMixin, generic.ListView):
+    model = Payment
+    context_object_name = 'payment'
+    template_name = 'payment/payment_list.html'
