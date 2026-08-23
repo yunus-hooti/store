@@ -7,5 +7,5 @@ app_name = "payment"
 urlpatterns = [
     path('request/', views.send_request, name='request'),
     path('verify/', views.verify, name='verify'),
-    path('payment-list/',views.PaymentListView.as_view(), name='payment-list'),
+    path('payment_list/',views.PaymentListView.as_view(), name='payment_list'),
 ]

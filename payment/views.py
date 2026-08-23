@@ -5,7 +5,7 @@ from django.conf import settings
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 import requests
 import json
 
@@ -54,7 +54,7 @@ def send_request(request):
             if response_json['Status'] == 100:
                 reducing_inventory(request)
                 Product.objects.create(user=request.user, amount=cart.total_price_next_discount(),
-                                       description=description, phone=request.user.phone)
+                                       description=description, phone=request.user.phone,status='success')
                 cart.clear()
                 return redirect(ZP_API_STARTPAY + authority)
             else:
@@ -107,3 +107,11 @@ class PaymentListView(LoginRequiredMixin, generic.ListView):
     model = Payment
     context_object_name = 'payment'
     template_name = 'payment/payment_list.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        if self.request.user.is_superuser:
+            context['payment'] = Payment.objects.all()
+        else:
+            context['payment'] = Payment.objects.filter(user=self.request.user)
+        return context
