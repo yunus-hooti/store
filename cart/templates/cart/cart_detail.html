@@ -66,7 +66,7 @@
             <span><span id="all-total-price">{{ cart.all_total_price }}</span> تومان</span>
         </div>
         {% if cart.total_price %}
-        <a href="{% url 'order:order_create' %}" class="btn btn-primary" style="width: 100%; margin-top: 20px; font-size: 16px;">تکمیل سفارش</a>
+        <a href="{% url 'order:order_create' %}" class="btn btn-primary" id="checkout-btn" style="width: 100%; margin-top: 20px; font-size: 16px;">تکمیل سفارش</a>
         {% endif %}
     </div>
 </div>
@@ -75,6 +75,37 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<!--<script>-->
+<!--    function updateQty(productId, action) {-->
+<!--        fetch("{% url 'cart:cart_update' %}", {-->
+<!--            method: "POST",-->
+<!--            headers: {-->
+<!--                "X-CSRFToken": "{{ csrf_token }}",-->
+<!--                "Content-Type": "application/x-www-form-urlencoded"-->
+<!--            },-->
+<!--            body: `product_id=${productId}&action=${action}`-->
+<!--        })-->
+<!--        .then(res => res.json())-->
+<!--        .then(data => {-->
+<!--            if (data.success) {-->
+<!--                if (action === 'remove') {-->
+<!--                    document.getElementById(`item-row-${productId}`).remove();-->
+<!--                } else {-->
+<!--                    document.getElementById(`qty-${productId}`).innerText = data.quantity;-->
+<!--                    document.getElementById(`total-${productId}`).innerText = data.total_;-->
+<!--                }-->
+
+<!--                document.getElementById("post-price").innerText = data.price_post;-->
+<!--                document.getElementById("all-total-price").innerText = data.all_total_price;-->
+<!--                // نکته: در کد اصلی شما total-price وجود داشت که در HTML نبود،-->
+<!--                // اگر در جای دیگری از صفحه هست آن را نگه دارید.-->
+<!--                const totalElem = document.getElementById("total-price");-->
+<!--                if(totalElem) totalElem.innerText = data.total_price;-->
+<!--            }-->
+<!--        })-->
+<!--        .catch(err => console.error("Cart update error:", err));-->
+<!--    }-->
+<!--</script>-->
 <script>
     function updateQty(productId, action) {
         fetch("{% url 'cart:cart_update' %}", {
@@ -89,18 +120,42 @@
         .then(data => {
             if (data.success) {
                 if (action === 'remove') {
-                    document.getElementById(`item-row-${productId}`).remove();
+                    const row = document.getElementById(`item-row-${productId}`);
+                    if (row) row.remove();
                 } else {
-                    document.getElementById(`qty-${productId}`).innerText = data.quantity;
-                    document.getElementById(`total-${productId}`).innerText = data.total_;
+                    const qtyElem = document.getElementById(`qty-${productId}`);
+                    const itemTotalElem = document.getElementById(`total-${productId}`);
+                    if (qtyElem) qtyElem.innerText = data.quantity;
+                    if (itemTotalElem) itemTotalElem.innerText = data.total_;
                 }
 
-                document.getElementById("post-price").innerText = data.price_post;
-                document.getElementById("all-total-price").innerText = data.all_total_price;
-                // نکته: در کد اصلی شما total-price وجود داشت که در HTML نبود،
-                // اگر در جای دیگری از صفحه هست آن را نگه دارید.
+                // آپدیت قیمت‌های فاکتور
+                const postPriceElem = document.getElementById("post-price");
+                if (postPriceElem) postPriceElem.innerText = data.price_post;
+
+                const allTotalElem = document.getElementById("all-total-price");
+                if (allTotalElem) allTotalElem.innerText = data.all_total_price;
+
                 const totalElem = document.getElementById("total-price");
-                if(totalElem) totalElem.innerText = data.total_price;
+                if (totalElem) totalElem.innerText = data.total_price;
+
+                // ----------------------------------------------------
+                // بخش حذف یا غیرفعال‌سازی دکمه ادامه خرید
+                // ----------------------------------------------------
+                const checkoutBtn = document.getElementById("checkout-btn"); // شناسه دکمه ادامه خرید
+
+                // تبدیل مقدار قیمت یا تعداد به عدد برای اطمینان از صفر بودن
+                const finalTotal = parseFloat(data.all_total_price || data.total_price || 0);
+
+                if (checkoutBtn) {
+                    if (finalTotal <= 0) {
+                        // روش اول: حذف کامل دکمه از صفحه (DOM)
+<!--                        checkoutBtn.remove();-->
+
+                        // یا اگر خواستی فقط مخفی شود به جای remove:
+                         checkoutBtn.style.display = 'none';
+                    }
+                }
             }
         })
         .catch(err => console.error("Cart update error:", err));
