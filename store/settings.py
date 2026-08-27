@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'coupon.apps.CouponConfig',
     'order.apps.OrderConfig',
     'payment.apps.PaymentConfig',
-    'api.apps.ApiConfig'
+    'api.apps.ApiConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -196,3 +197,13 @@ LOGGING = {
         }
     }
 }
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ]
+}
+
+
+
