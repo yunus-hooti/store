@@ -220,8 +220,8 @@
     <!-- اطلاعات -->
     <section class="panel detail-panel">
         <div class="breadcrumbs">
-            <a href="#">خانه</a> /
-            <a href="#">{{ product.category.name }}</a> /
+            <a href="{% url 'catalog:category_list' %}">خانه</a> /
+            <a href="{% url 'catalog:product_list_category' product.category.slug %}">{{ product.category.name }}</a> /
             <span>{{ product.name }}</span>
         </div>
 
