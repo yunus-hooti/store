@@ -19,6 +19,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 
 urlpatterns = [
@@ -30,6 +31,8 @@ urlpatterns = [
     path('order/', include('order.urls', namespace='order')),
     path('payment/', include('payment.urls', namespace='payment')),
     path('api/', include('api.urls', namespace='api')),
-]
+
+] + debug_toolbar_urls()
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

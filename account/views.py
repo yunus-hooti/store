@@ -81,9 +81,9 @@ class ProfileView(UserPassesTestMixin, generic.TemplateView):
     def get_context_data(self, **kwargs):
         try:
             context = super().get_context_data(**kwargs)
-            context['address_user'] = AddressUser.objects.filter(user=self.request.user)
+            context['address_user'] = AddressUser.objects.select_related('user').filter(user=self.request.user)
             cart = Cart(self.request)
-            order = Order.objects.filter(user=self.request.user)
+            order = Order.objects.select_related('user').filter(user=self.request.user)
             context['orders_count'] = len(order)
             context["total_price"] = cart.total_price()
             context["cart_item_count"] = cart.get_item_count()

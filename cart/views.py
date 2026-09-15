@@ -72,7 +72,7 @@ class CartUpdateView(View):
 
             updated_quantity = cart.cart.get(str(product_id), {}).get('quantity', 0)
             product_ids = cart.cart.keys()
-            products = Product.objects.filter(id__in=product_ids)
+            products = Product.objects.select_related('category','images').filter(id__in=product_ids)
             discount_products_list = discount_products(products)
             product_map = {str(p.id): p for p in discount_products_list}
             current_product = product_map.get(str(product_id))

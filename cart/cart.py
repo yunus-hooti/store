@@ -1,6 +1,7 @@
 from catalog.models import Product
 from coupon.views import discount_products
 
+
 class Cart:
     def __init__(self, request):
         self.session = request.session
@@ -103,5 +104,3 @@ class Cart:
             del self.session['cart']
         self.cart = {}
         self.session.modified = True
-
-

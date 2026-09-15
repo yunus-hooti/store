@@ -22,7 +22,7 @@ class OrderCreateView(LoginRequiredMixin, View):
     def get(self, request):
         try:
             cart = Cart(request)
-            address_user = AddressUser.objects.filter(user=request.user)
+            address_user = AddressUser.objects.select_related('user').filter(user=request.user)
             return render(request, 'order/checkout.html',
                           {'cart': cart, 'address_user': address_user, 'quantity': len(cart.cart)})
         except AddressUser.DoesNotExist:
@@ -71,7 +71,7 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
     template_name = 'order/order_list.html'
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user).order_by('-created')
+        return Order.objects.select_related('user').filter(user=self.request.user).order_by('-created')
 
 
 class OrderDetailView(LoginRequiredMixin, generic.DetailView):

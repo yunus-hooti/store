@@ -37,12 +37,14 @@ class ProductListView(generic.ListView):
         product = None
         try:
             category = Category.objects.get(slug=self.kwargs['slug'])
-            product = Product.objects.filter(category=category)
+            product = Product.objects.select_related('category').filter(category=category)
         except:
-            product = Product.objects.all()
+            product = Product.objects.select_related('category').all()
         try:
             context = super().get_context_data(**kwargs)
-            context['products'] = discount_products(product)
+            discount_products_list = discount_products(product)
+            context['products'] = discount_products_list
+            context['products_count'] = len(discount_products_list)
             return context
         except Exception as e:
             logger.error(f'مشکل در نمایش محصولات تخفیف خورده {e} ', exc_info=True)
@@ -74,7 +76,7 @@ class ProductDetailView(generic.DetailView):
         try:
             context = super().get_context_data(**kwargs)
             pk = self.kwargs['pk']
-            product = Product.objects.get(pk=pk)
+            product = Product.objects.select_related('category').get(pk=pk)
             context['product'] = discount_products([product])[0]
             return context
         except Exception as e:

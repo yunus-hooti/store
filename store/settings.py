@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'order.apps.OrderConfig',
     'payment.apps.PaymentConfig',
     'api.apps.ApiConfig',
-    'rest_framework'
+    'rest_framework',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -61,7 +63,7 @@ ROOT_URLCONF = 'store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "account/templates/", BASE_DIR / "order/templates",BASE_DIR / "payment/templates"],
+        'DIRS': [BASE_DIR / "account/templates/", BASE_DIR / "order/templates", BASE_DIR / "payment/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,8 +146,6 @@ MERCHANT = "4ec277ab-66f7-4892-b18b-c7b62603408a"
 
 SANDBOX = True
 
-
-
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOGGING = {
@@ -186,18 +186,17 @@ LOGGING = {
     },
     'loggers': {
         'catalog': {
-            'handlers': ['console','all_events_file','error_file'],
+            'handlers': ['console', 'all_events_file', 'error_file'],
             'level': 'INFO',
             'propagate': True,
         },
         'django': {
-            'handlers': ['console','error_file'],
+            'handlers': ['console', 'error_file'],
             'level': 'INFO',
             'propagate': True,
         }
     }
 }
-
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
@@ -205,5 +204,6 @@ REST_FRAMEWORK = {
     ]
 }
 
-
-
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
