@@ -1,6 +1,6 @@
 {% extends "parent/base.html" %}
 {% block title %}محصولات تخفیف‌دار{% endblock %}
-
+{% load price_filters %}
 {% block extra_head %}
 <style>
   .hero{
@@ -168,7 +168,7 @@
     {% for p in products %}
       <article class="card">
         {% if p.discount_percent %}
-          <div class="tag">٪{{ p.discount_percent }} تخفیف</div>
+          <div class="tag">٪{{ p.discount_percent|price_format }} تخفیف</div>
         {% endif %}
 
         <div class="thumb">
@@ -185,9 +185,9 @@
           <div class="meta">
             <div class="priceWrap">
               {% if p.old_price %}
-                <span class="oldPrice">{{ p.old_price }} تومان</span>
+                <span class="oldPrice">{{ p.old_price|price_format }} تومان</span>
               {% endif %}
-              <span class="newPrice">{{ p.price }} تومان</span>
+              <span class="newPrice">{{ p.price|price_format }} تومان</span>
             </div>
           </div>
 

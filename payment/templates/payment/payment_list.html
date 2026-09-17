@@ -1,6 +1,6 @@
 {% extends "parent/base.html" %}
 {% load static %}
-
+{% load price_filters %}
 {% block title %}
     پنل مدیریت تراکنش‌ها
 {% endblock title %}
@@ -38,7 +38,7 @@
                         {{ transaction.user.phone|default:"کاربر ناشناس" }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-700">
-                        <span class="font-bold text-gray-900">{{ transaction.amount|floatformat:0 }}</span>
+                        <span class="font-bold text-gray-900">{{ transaction.amount|floatformat:0|price_format }}</span>
                         <span class="text-xs text-gray-500">تومان</span>
                     </td>
                     <td class="px-6 py-4 text-sm">

@@ -1,6 +1,6 @@
 {% extends "parent/base.html" %}
 {% block title %}{{ product.name }}{% endblock %}
-
+{% load price_filters %}
 {% block extra_head %}
 <style>
     .product-shell{
@@ -239,7 +239,7 @@
             {% endif %}
 
             {% if product.discount_percent %}
-            <span class="discount-badge">٪{{ product.discount_percent }} تخفیف</span>
+            <span class="discount-badge">٪{{ product.discount_percent|price_format }} تخفیف</span>
             {% endif %}
         </div>
 
@@ -247,9 +247,9 @@
             <div class="price-row">
                 <div>
                     {% if product.old_price %}
-                    <div class="old-price">{{ product.old_price }} تومان</div>
+                    <div class="old-price">{{ product.old_price|price_format }} تومان</div>
                     {% endif %}
-                    <div class="new-price">{{ product.price }} تومان</div>
+                    <div class="new-price">{{ product.price|price_format }} تومان</div>
                 </div>
             </div>
         </div>

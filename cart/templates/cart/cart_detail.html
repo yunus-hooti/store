@@ -1,5 +1,5 @@
 {% extends 'parent/base.html' %}
-
+{% load price_filters %}
 {% block title %}سبد خرید شما{% endblock %}
 
 {% block content %}
@@ -28,7 +28,7 @@
                             {{ item.product.price }} تومان
                         </span>
                     {% else %}
-                    <div style="color: var(--muted);">{{ item.product.price }} تومان</div>
+                    <div style="color: var(--muted);">{{ item.product.price|price_format }} تومان</div>
                     {% endif %}
                 </div>
             </div>
@@ -40,7 +40,7 @@
             </div>
 
             <div style="grid-column: span 2; font-weight: 700;">
-                <span id="total-{{ item.product.id }}">{{ item.total }}</span> <small>تومان</small>
+                <span id="total-{{ item.product.id }}">{{ item.total|price_format }}</span> <small>تومان</small>
             </div>
 
             <button class="btn" style="grid-column: span 1; background: var(--danger); border-color: transparent;"
@@ -59,11 +59,11 @@
     <div style="margin-top: 32px; background: var(--card2); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border);">
         <div style="display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--muted);">
             <span>هزینه ارسال:</span>
-            <span><span id="post-price">{{ cart.price_post }}</span> تومان</span>
+            <span><span id="post-price">{{ cart.price_post|price_format }}</span> تومان</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 800;">
             <span>جمع کل:</span>
-            <span><span id="all-total-price">{{ cart.all_total_price }}</span> تومان</span>
+            <span><span id="all-total-price">{{ cart.all_total_price|price_format }}</span> تومان</span>
         </div>
         {% if cart.total_price %}
         <a href="{% url 'order:order_create' %}" class="btn btn-primary" id="checkout-btn" style="width: 100%; margin-top: 20px; font-size: 16px;">تکمیل سفارش</a>

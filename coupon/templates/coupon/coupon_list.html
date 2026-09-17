@@ -1,7 +1,7 @@
 {% extends 'parent/base.html' %}
 
 {% block title %}لیست تخفیف‌ها{% endblock %}
-
+{% load price_filters %}
 {% block content %}
 <div class="container-fluid py-4">
 
@@ -82,7 +82,7 @@
                             {% if discount.discount_type == 'percent' %}
                             {{ discount.value }}٪
                             {% else %}
-                            {{ discount.value }} تومان
+                            {{ discount.value|price_format }} تومان
                             {% endif %}
                         </td>
 

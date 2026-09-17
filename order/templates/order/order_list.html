@@ -1,5 +1,6 @@
 {% extends 'parent/base.html' %}
 {% load static %}
+{% load price_filters %}
 
 {% block title %}سفارش‌های من{% endblock %}
 
@@ -63,7 +64,7 @@
                             <div class="col-md-3 text-md-end mt-3 mt-md-0">
                                 <div class="mb-3">
                                     <span class="text-muted small d-block">مبلغ نهایی:</span>
-                                    <span class="h5 fw-bold text-primary">{{ order.final_amount|floatformat:0 }} <small>تومان</small></span>
+                                    <span class="h5 fw-bold text-primary">{{ order.final_amount|floatformat:0|price_format }} <small>تومان</small></span>
                                 </div>
                                 
                                 <div class="d-grid gap-2 d-md-block">
