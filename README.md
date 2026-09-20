@@ -82,7 +82,7 @@ store/
 - Pillow (پردازش تصاویر)
 - deep-translator (ترجمه خودکار)
 - pytest (تست)
-- SQLite (دیتابیس توسعه)
+- PostgreSQL (دیتابیس توسعه)
 
 ## وضعیت پروژه
 
