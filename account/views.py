@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import generic
@@ -83,8 +82,8 @@ class ProfileView(UserPassesTestMixin, generic.TemplateView):
             context = super().get_context_data(**kwargs)
             context['address_user'] = AddressUser.objects.select_related('user').filter(user=self.request.user)
             cart = Cart(self.request)
-            order = Order.objects.select_related('user').filter(user=self.request.user)
-            context['orders_count'] = len(order)
+            order = Order.objects.filter(user=self.request.user)
+            context['orders_count'] = order.count()
             context["total_price"] = cart.total_price()
             context["cart_item_count"] = cart.get_item_count()
 

@@ -1,3 +1,5 @@
+from django.db.models import Prefetch, Count
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
@@ -23,6 +25,9 @@ class CategoryListView(generic.ListView):
     template_name = 'catalog/category_list.html'
     context_object_name = 'categories'
 
+    def get_queryset(self):
+        return Category.objects.annotate(products_count=Count('products')).order_by('name')
+
 
 class ProductListView(generic.ListView):
     """
@@ -34,21 +39,28 @@ class ProductListView(generic.ListView):
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
-        product = None
+        context = super().get_context_data(**kwargs)
+        context['products_count'] = len(self.object_list)
+        return context
+
+    def get_queryset(self):
         try:
-            category = Category.objects.get(slug=self.kwargs['slug'])
-            product = Product.objects.select_related('category').filter(category=category)
-        except:
-            product = Product.objects.select_related('category').all()
-        try:
-            context = super().get_context_data(**kwargs)
-            discount_products_list = discount_products(product)
-            context['products'] = discount_products_list
-            context['products_count'] = len(discount_products_list)
-            return context
+            slug = self.kwargs.get('slug')
+            if slug:
+                category = Category.objects.get(slug=slug)
+                qs = Product.objects.select_related('category').prefetch_related(
+                    Prefetch('images', queryset=Images.objects.order_by('id'))).filter(category=category)
+            else:
+                qs = Product.objects.select_related('category').prefetch_related(
+                    Prefetch('images', queryset=Images.objects.order_by('id'))).all()
+            product_count = len(qs)
+            return discount_products(qs)
+        except Category.DoesNotExist:
+            logger.error(f'دسته بندی با slug={slug} پیدا نشد ')
+            raise Http404(f'دسته بندی مورد نظر پیدا نشد')
         except Exception as e:
-            logger.error(f'مشکل در نمایش محصولات تخفیف خورده {e} ', exc_info=True)
-            raise Exception("مشکل در نمایش محصولات تخفیف خورده")
+            logger.error(f'مشکل در نمایش محصولات تخفیف خورده {e}', exc_info=True)
+            raise
 
 
 class CreateCategoryView(UserPassesTestMixin, generic.CreateView):
@@ -72,17 +84,20 @@ class ProductDetailView(generic.DetailView):
     template_name = 'catalog/product_detail.html'
     context_object_name = "product"
 
+    def get_queryset(self):
+        return Product.objects.select_related('category').prefetch_related(
+            Prefetch('images', queryset=Images.objects.order_by('id'))
+        )
+
     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
         try:
-            context = super().get_context_data(**kwargs)
-            pk = self.kwargs['pk']
-            product = Product.objects.select_related('category').get(pk=pk)
-            context['product'] = discount_products([product])[0]
-            return context
+            context['product'] = discount_products([self.object])[0]
         except Exception as e:
             logger.error(f"مشکل در نمایش مقدار تخفیف محصول {e} ", exc_info=True)
             raise Exception("مشکل در نمایش مقدار تخفیف محصول")
-
+        return context
 
 class CreateProductView(UserPassesTestMixin, generic.TemplateView):
     """

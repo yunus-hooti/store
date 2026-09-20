@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.db.models import Prefetch, Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import logging
 
 from account.models import AddressUser
-from catalog.models import Product
+from catalog.models import Product, Images
 from .models import Order, OrderItem
 from cart.cart import Cart
 
@@ -26,7 +26,7 @@ class OrderCreateView(LoginRequiredMixin, View):
             return render(request, 'order/checkout.html',
                           {'cart': cart, 'address_user': address_user, 'quantity': len(cart.cart)})
         except AddressUser.DoesNotExist:
-            logging.error("مشکل در ارسال  اطلاعت",exc_info=True)
+            logging.error("مشکل در ارسال  اطلاعت", exc_info=True)
             raise Exception("مشکل در ارسال  اطلاعت")
 
     def post(self, request):
@@ -45,7 +45,7 @@ class OrderCreateView(LoginRequiredMixin, View):
             )
             order.save()
         except Exception as e:
-            logging.error(f"مشکل در ذخیره سفارش {e} ",exc_info=True)
+            logging.error(f"مشکل در ذخیره سفارش {e} ", exc_info=True)
             raise Exception("مشکل در ذخیره سفارش")
         try:
             for p_id, item in cart.cart.items():
@@ -62,8 +62,9 @@ class OrderCreateView(LoginRequiredMixin, View):
             cart.clear()
             return redirect('catalog:product_list')
         except Exception as e:
-            logging.error(f"مشکل در ثبت آیتم سفارش ها {e} ",exc_info=True)
+            logging.error(f"مشکل در ثبت آیتم سفارش ها {e} ", exc_info=True)
             raise Exception("مشکل در ثبت آیتم سفارش ها")
+
 
 class OrderListView(LoginRequiredMixin, generic.ListView):
     model = Order
@@ -71,7 +72,11 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
     template_name = 'order/order_list.html'
 
     def get_queryset(self):
-        return Order.objects.select_related('user').filter(user=self.request.user).order_by('-created')
+        return (Order.objects.select_related('user').filter(user=self.request.user).
+        prefetch_related(Prefetch(
+            'items',
+            queryset=OrderItem.objects.select_related('product').annotate(items_count=Count('order')))).order_by(
+            '-created'))
 
 
 class OrderDetailView(LoginRequiredMixin, generic.DetailView):
@@ -86,4 +91,7 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
         return context
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        return (Order.objects.select_related('user', 'address_user').filter(user=self.request.user).
+                prefetch_related(Prefetch('items', queryset=OrderItem.objects.select_related('product__category').
+                                          prefetch_related(
+            Prefetch("product__images", queryset=Images.objects.order_by('id'))))))

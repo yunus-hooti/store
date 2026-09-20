@@ -46,6 +46,11 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
+    def first_image(self):
+        images = list(self.images.all())
+        print(images)
+        return images[0] if images else None
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -1,3 +1,4 @@
+from django.db.models import Prefetch
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
@@ -7,7 +8,7 @@ from django.http import JsonResponse
 import logging
 
 from .cart import Cart
-from catalog.models import Product
+from catalog.models import Product, Images
 from coupon.views import discount_products
 
 
@@ -72,7 +73,8 @@ class CartUpdateView(View):
 
             updated_quantity = cart.cart.get(str(product_id), {}).get('quantity', 0)
             product_ids = cart.cart.keys()
-            products = Product.objects.select_related('category','images').filter(id__in=product_ids)
+            products = Product.objects.select_related('category').prefetch_related(
+                Prefetch("images", queryset=Images.objects.order_by('id'))).filter(id__in=product_ids)
             discount_products_list = discount_products(products)
             product_map = {str(p.id): p for p in discount_products_list}
             current_product = product_map.get(str(product_id))

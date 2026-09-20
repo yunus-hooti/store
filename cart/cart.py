@@ -1,4 +1,6 @@
-from catalog.models import Product
+from django.db.models import Prefetch
+
+from catalog.models import Product, Images
 from coupon.views import discount_products
 
 
@@ -6,9 +8,20 @@ class Cart:
     def __init__(self, request):
         self.session = request.session
         cart = self.session.get('cart')
+        self._product_cache = None
+        self._items_cache = None
         if not cart:
             cart = self.session['cart'] = {}
         self.cart = cart
+
+    @property
+    def products(self):
+        if self._product_cache is None:
+            product_ids = self.cart.keys()
+            self._product_cache = (Product.objects.filter(
+                id__in=product_ids).select_related('category').
+                                   prefetch_related('images'))
+        return self._product_cache
 
     def add(self, product):
         product_id = str(product.id)
@@ -47,9 +60,8 @@ class Cart:
 
     def total_price_next_discount(self):
         total = []
-        for i, j in self.cart.items():
-            product_d = self.product_discount(i)
-            total.append(product_d[0].price * j['quantity'])
+        for items in self:
+            total.append(items['product'].price * items['quantity'])
         return sum(total)
 
     def discount_amount(self):
@@ -80,20 +92,41 @@ class Cart:
     def get_item_count(self):
         return len(self.cart)
 
+    # def __iter__(self):
+    #     product_ids = self.cart.keys()
+    #     products = Product.objects.filter(id__in=product_ids)
+    #     products_discount_list = discount_products(list(products))
+    #     products_map = {str(p.id): p for p in products_discount_list}
+    #     cart_copy = self.cart.copy()
+    #     for i, item in cart_copy.items():
+    #         product = products_map.get(i)
+    #         if product:
+    #             item['product'] = product
+    #             item['total'] = product.price * item['quantity']
+    #         else:
+    #             item['total'] = 0
+    #         yield item
     def __iter__(self):
+        if self._items_cache is not None:
+            yield from self._items_cache
+            return
         product_ids = self.cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
+        products = Product.objects.filter(id__in=product_ids).select_related('category').prefetch_related(
+            Prefetch('images', queryset=Images.objects.order_by('id')))
         products_discount_list = discount_products(list(products))
         products_map = {str(p.id): p for p in products_discount_list}
-        cart_copy = self.cart.copy()
-        for i, item in cart_copy.items():
+        items = []
+        for i, rew_item in self.cart.items():
+            item = rew_item.copy()
             product = products_map.get(i)
             if product:
                 item['product'] = product
                 item['total'] = product.price * item['quantity']
             else:
                 item['total'] = 0
-            yield item
+            items.append(item)
+        self._items_cache = items
+        yield from items
 
     def save(self):
         self.session['cart'] = self.cart

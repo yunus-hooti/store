@@ -172,8 +172,8 @@
         {% endif %}
 
         <div class="thumb">
-          {% if p.images.first.image %}
-             <img src="{{ p.images.first.image.url }}" alt="{{ p.name }}">
+          {% if p.first_image %}
+             <img src="{{ p.first_image.image.url }}" alt="{{ p.name }}">
           {% else %}
             <div style="color: var(--muted); font-weight:800;">تصویر ندارد</div>
           {% endif %}

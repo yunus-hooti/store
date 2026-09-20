@@ -111,7 +111,7 @@ class PaymentListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         if self.request.user.is_superuser:
-            context['payment'] = Payment.objects.select_related('user').all()
+            context['payment'] = Payment.objects.all()
         else:
-            context['payment'] = Payment.objects.select_related('user').filter(user=self.request.user)
+            context['payment'] = Payment.objects.filter(user=self.request.user)
         return context
