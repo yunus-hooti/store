@@ -1,9 +1,9 @@
 from django.db import models
+from django_jalali.db import models as jmodels
 
 from account.models import User, AddressUser
 from catalog.models import Product
 
-import string
 import random
 
 
@@ -36,8 +36,10 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=100,unique=True, blank=True, null=True, verbose_name='کد پیگیری')
     payment = models.BooleanField(default=False, verbose_name='پرداخت')
     status = models.CharField(choices=Product_status, default='در حال پردازش', verbose_name='وضعیت سفارش')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = jmodels.jDateTimeField(auto_now_add=True)
+    updated = jmodels.jDateTimeField(auto_now=True)
+
+    objects = jmodels.jManager()
 
     def save(self, *args, **kwargs):
         if not self.pk:

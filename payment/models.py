@@ -1,4 +1,5 @@
 from django.db import models
+from django_jalali.db import models as jmodels
 
 from account.models import User
 
@@ -21,8 +22,10 @@ class Payment(models.Model):
     description = models.CharField(max_length=250,verbose_name='توضحیات')
     phone = models.CharField(max_length=11,verbose_name='شماره')
     status = models.CharField(choices=payment_status,default='pending',verbose_name='وضعیت تراکنش')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = jmodels.jDateTimeField(auto_now_add=True)
+    updated = jmodels.jDateTimeField(auto_now=True)
+
+    objects = jmodels.jManager()
 
     def __str__(self):
         return f"{self.user}-{self.description}"

@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
+from django_jalali.db import models as jmodels
 
 
 # Create your models here.
@@ -35,18 +36,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     User model from base
     """
     phone = models.CharField(max_length=11, unique=True, verbose_name='شماره')
-    email = models.EmailField(unique=True,null=True,blank=True,verbose_name="ایمیل")
+    email = models.EmailField(unique=True, null=True, blank=True, verbose_name="ایمیل")
     first_name = models.CharField(max_length=55, null=True, blank=True, verbose_name='اسم')
     last_name = models.CharField(max_length=55, null=True, blank=True, verbose_name='فامیل')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    date_joined = models.DateTimeField(default=timezone.now)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    updated_at = jmodels.jDateTimeField(auto_now=True)
+    date_joined = jmodels.jDateTimeField(default=timezone.now)
 
     manager = UserManager()
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ["first_name", 'last_name']
+    objects = jmodels.jManager()
 
     def __str__(self):
         return f"{self.phone} {self.first_name}"
@@ -69,8 +71,10 @@ class AddressUser(models.Model):
     province = models.CharField(max_length=255, null=True, blank=True, verbose_name="استان")
     city = models.CharField(max_length=255, null=True, blank=True, verbose_name="شهر")
     cod_post = models.CharField(max_length=10, null=True, blank=True, verbose_name="کد پستی")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    updated_at = jmodels.jDateTimeField(auto_now=True)
+
+    objects = jmodels.jManager()
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -88,8 +92,10 @@ class OTPCode(models.Model):
     """
     phone = models.CharField(max_length=11)
     code = models.CharField(max_length=6)
-    created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField()
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    expires_at = jmodels.jDateTimeField()
+
+    objects = jmodels.jManager()
 
     def is_expired(self):
         return timezone.now() > self.expires_at

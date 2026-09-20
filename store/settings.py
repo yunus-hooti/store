@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'api.apps.ApiConfig',
     'rest_framework',
-    'debug_toolbar'
+    'debug_toolbar',
+    'django_jalali'
 ]
 
 MIDDLEWARE = [

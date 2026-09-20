@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django_jalali.db import models as jmodels
 
 from catalog.models import Category, Product
 
@@ -29,8 +30,10 @@ class Discount(models.Model):
     end_date = models.DateTimeField(null=True, blank=True)
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, verbose_name='محصول')
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE, verbose_name='دسته بندی')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    updated_at = jmodels.jDateTimeField(auto_now=True)
+
+    objects = jmodels.jManager()
 
     def is_valid(self):
         new = timezone.now()
@@ -64,8 +67,10 @@ class DiscountCoupon(models.Model):
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, verbose_name='محصول')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    updated_at = jmodels.jDateTimeField(auto_now=True)
+
+    objects = jmodels.jManager()
 
     def is_valid(self):
         new = timezone.now()

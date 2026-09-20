@@ -1,6 +1,7 @@
 from django.db import models
 from unidecode import unidecode
 from django.utils.text import slugify
+from django_jalali.db import models as jmodels
 
 from .utils import unique_slug_generator
 
@@ -43,8 +44,10 @@ class Product(models.Model):
     price = models.PositiveIntegerField(default=0, verbose_name="قیمت")
     inventory = models.PositiveIntegerField(default=0, verbose_name="مقدار")
     weight = models.PositiveIntegerField(default=0, verbose_name="وزن")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    updated_at =jmodels.jDateTimeField(auto_now=True)
+
+    objects = jmodels.jManager()
 
     @property
     def first_image(self):
@@ -79,8 +82,10 @@ class Feature(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='features', verbose_name="کالا")
     name = models.CharField(max_length=255, verbose_name="ویژگی")
     value = models.CharField(max_length=255, verbose_name="مقدار")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    updated_at = jmodels.jDateTimeField(auto_now=True)
+
+    objects = jmodels.jManager()
 
     class Meta:
         verbose_name_plural = "Features"
@@ -98,4 +103,6 @@ class Images(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     title = models.CharField(max_length=255, null=True, blank=True, verbose_name="تایتل")
     image = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name='عکس')
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+
+    objects = jmodels.jManager()
